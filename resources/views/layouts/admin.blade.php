@@ -7,6 +7,8 @@
     <title>Terra Nostra</title>
 </head>
 <body>
-    <h1>Terra Nostra</h1>
+    
+    @yield('content')
+
 </body>
 </html>
