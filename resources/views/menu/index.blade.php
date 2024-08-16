@@ -4,9 +4,26 @@
 
     <h2>Menu</h2>
 
-    <a href="">
+    <x-alert/>
+
+    <a href="{{ route('menu.create') }}">
         <button type="button">Cadastrar Novo Item</button>
     </a>
+    <br>
+
+
+    @forelse ($produtos as $produto)
+
+        <a href="{{ route('menu.show', ['menu' => $produto->id]) }}">
+            <button>Detalhes</button>
+        </a>
+
+        {{ $produto->descricao }} <br>
+        
+    @empty
+        <p style="color: red">Nenhum produto encontrado</p>
+        
+    @endforelse
 
 
     
