@@ -10,13 +10,21 @@
 
     <x-alert/>
 
-    <form action="{{ route('menu.store') }}" method="POST">
+    <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
 
-        <label>Descrição: </label>
-        <input type="text" name="descricao" id="descricao" placeholder="Decriçao do Item" value="{{ old('name') }}" required>
+        <label>Nome: </label>
+        <input type="text" name="nome" id="nome" placeholder="Nome do Produto" value="{{ old('name') }}" required>
 
+        <label>Descrição: </label>
+        <input type="text" name="descricao" id="descricao" placeholder="Decriçao do Produto" value="{{ old('name') }}" required>
+
+        <label>Preço: </label>
+        <input type="text" name="preco" id="preco" placeholder="Valor do Produto" value="{{ old('name') }}" required>
+
+        <label for="product_file_name">Selecione o arquive de imagem:</label>
+        <input type="file" name="product_file_name" id="product_file_name" required>
 
         <button type="submit">Cadastrar</button>
 

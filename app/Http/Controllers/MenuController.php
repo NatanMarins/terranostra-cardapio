@@ -34,10 +34,15 @@ class MenuController extends Controller
         //$request->validated();
         // nao ta funcionando ainda
 
+        //Transformando o nome do arquivo de imagem em um nome único
+        $file_name = rand(0, 999999) . '-' . $request->file('product_file_name')->getClientOriginalName();
+        $path = $request->file('product_file_name')->storeAs('uploads', $file_name);
+
+        $data = $request->all();
+        $data['product_file_name'] = $path;
+
         //Cadastrar no banco de dados
-        Menu::create([
-            'descricao' => $request->descricao
-        ]);
+        Menu::create($data);
 
         // Redirecionar o usuário
         return redirect()->route('menu.create')->with('success', 'Produto cadastrado com sucesso!');

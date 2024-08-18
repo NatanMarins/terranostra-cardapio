@@ -8,5 +8,9 @@
 </head>
 <body>
     <h1>Terra Nostra</h1>
+
+    <a href="{{ route('menu.index') }}">
+        <button type="button">Lista de produtos</button>
+    </a>
 </body>
 </html>

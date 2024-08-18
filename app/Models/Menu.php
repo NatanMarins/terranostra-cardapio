@@ -13,5 +13,5 @@ class Menu extends Model
     protected $table = 'menu';
 
     // Colunas que podem ser cadastradas
-    protected $fillable = ['descricao'];
+    protected $fillable = ['nome', 'descricao', 'preco', 'product_file_name'];
 }

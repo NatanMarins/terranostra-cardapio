@@ -17,7 +17,9 @@
         <a href="{{ route('menu.show', ['menu' => $produto->id]) }}">
             <button>Detalhes</button>
         </a>
-
+        <img src="{{ asset("storage/{$produto->product_file_name}") }}" alt="[imagem]"> <br>
+        {{ $produto->nome }} <br>
+        {{ $produto->preco }} <br>
         {{ $produto->descricao }} <br>
         
     @empty
