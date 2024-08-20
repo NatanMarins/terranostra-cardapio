@@ -10,8 +10,10 @@
         <button type="button">Lista de produtos</button>
     </a>
 
-
-    Descrição: {{ $menu->descricao }}
+    <img src="{{ asset("storage/{$menu->product_file_name}") }}" alt="[imagem]">
+    <p>Nome: {{ $menu->nome }}</p>
+    <p>Preço: {{ $menu->preco }}</p>
+    <p>Descrição: {{ $menu->descricao }}</p>
 
 
     <form action="{{ route('menu.destroy', ['menu' => $menu->id]) }}" method="POST">

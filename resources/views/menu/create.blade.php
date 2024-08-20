@@ -15,13 +15,13 @@
         @method('POST')
 
         <label>Nome: </label>
-        <input type="text" name="nome" id="nome" placeholder="Nome do Produto" value="{{ old('name') }}" required>
+        <input type="text" name="nome" id="nome" placeholder="Nome do Produto" value="{{ old('name') }}">
 
         <label>Descrição: </label>
-        <input type="text" name="descricao" id="descricao" placeholder="Decriçao do Produto" value="{{ old('name') }}" required>
+        <textarea name="descricao" id="descricao" cols="30" rows="4">{{ old('name') }}</textarea>
 
         <label>Preço: </label>
-        <input type="text" name="preco" id="preco" placeholder="Valor do Produto" value="{{ old('name') }}" required>
+        <input type="text" name="preco" id="preco" placeholder="Valor do Produto" value="{{ old('name') }}">
 
         <label for="categoria_id">Categoria:</label>
         <select id="categoria_id" name="categoria_id">
@@ -34,12 +34,10 @@
         </select>
 
         <label for="product_file_name">Selecione o arquive de imagem:</label>
-        <input type="file" name="product_file_name" id="product_file_name" required>
+        <input type="file" name="product_file_name" id="product_file_name">
 
         <button type="submit">Cadastrar</button>
 
     </form>
 
-
-    
 @endsection
