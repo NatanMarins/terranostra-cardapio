@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
-use App\Models\Caterogia;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 

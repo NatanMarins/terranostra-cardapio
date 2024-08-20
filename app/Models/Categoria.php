@@ -15,6 +15,7 @@ class Categoria extends Model
     // Colunas que podem ser cadastradas
     protected $fillable = ['categoria'];
 
+    // Criar relacionamento
     public function menus(){
         return $this->hasMany(Menu::class, 'categoria_id');
     }

@@ -13,11 +13,12 @@ class Menu extends Model
     protected $table = 'menu';
 
     // Colunas que podem ser cadastradas
-    protected $fillable = ['nome', 'descricao', 'preco', 'product_file_name'];
+    protected $fillable = ['nome', 'descricao', 'preco', 'categoria_id','product_file_name'];
 
 
-    public function categoria()
-    {
+    // Criar relacionamento
+
+    public function categoria(){
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 }
