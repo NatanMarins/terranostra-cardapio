@@ -2,26 +2,26 @@
 
 @section('content')
 
-    <h2>Menu</h2>
+    <div class="products-header">
+        <h2>Lista de produtos</h2>
+        <a href="{{ route('menu.create') }}">&#43</a>
+    </div>
 
     <x-alert/>
-
-    <a href="{{ route('menu.create') }}">
-        <button type="button">Cadastrar Novo Item</button>
-    </a>
+    
     <br>
 
 
     @forelse ($produtos as $produto)
-
-        <a href="{{ route('menu.show', ['menu' => $produto->id]) }}">
-            <button>Detalhes</button>
-        </a>
-        <img src="{{ asset("storage/{$produto->product_file_name}") }}" alt="[imagem]"> <br>
-        {{ $produto->nome }} <br>
-        {{ $produto->preco }} <br>
-        {{ $produto->descricao }} <br>
-        
+        <div class="card-container">
+            <div class="card">
+                <img src="{{ asset("storage/{$produto->product_file_name}") }}" alt="[imagem]">
+                <h3>{{ $produto->nome }}</h3>
+                <p>{{ $produto->descricao }}</p>
+                <div class="price">{{ $produto->preco }}</div> 
+                <a href="{{ route('menu.show', ['menu' => $produto->id]) }}" class="details-button">Detalhes</a>
+            </div>
+        </div>      
     @empty
         <p style="color: red">Nenhum produto encontrado</p>
         

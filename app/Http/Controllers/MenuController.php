@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
+use App\Models\Caterogia;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,10 @@ class MenuController extends Controller
 
 
     public function create(){
-        return view('menu.create');
+
+        $categorias = Categoria::all();
+
+        return view('menu.create', compact('categorias'));
     }
 
 
@@ -43,6 +48,8 @@ class MenuController extends Controller
 
         //Cadastrar no banco de dados
         Menu::create($data);
+
+        //dd($request->all());
 
         // Redirecionar o usuário
         return redirect()->route('menu.create')->with('success', 'Produto cadastrado com sucesso!');

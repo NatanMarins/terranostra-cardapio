@@ -14,4 +14,10 @@ class Menu extends Model
 
     // Colunas que podem ser cadastradas
     protected $fillable = ['nome', 'descricao', 'preco', 'product_file_name'];
+
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
 }
