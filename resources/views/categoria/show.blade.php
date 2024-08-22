@@ -10,13 +10,33 @@
         <button type="button">Lista de produtos</button>
     </a>
 
-    <p>Categoria: {{ $categoria->categoria }}</p>
+    <h3>Categorias: {{ $categoria->categoria }}</h3>
 
     @foreach ($categorias_count as $categoria_count)
         @if ($categoria_count->categoria == $categoria->categoria)
             <p>Foram cadastrados {{ $categoria_count->menus_count}} produtos na categoria {{ $categoria->categoria }}</p>
         @endif
     @endforeach
+
+    
+    @foreach ($categorias_names as $categoria_name)
+
+        @if ($categoria_name->categoria == $categoria->categoria)
+
+            @foreach ($categoria_name->menus as $item)
+            <ul>
+                <li>{{ $item->nome }}</li>
+            </ul>
+            @endforeach
+        
+        @endif
+
+    @endforeach
+
+
+
+
+
     
 
     <a href="{{ route('categoria.edit', ['categoria' => $categoria->id]) }}">

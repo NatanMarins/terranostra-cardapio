@@ -25,9 +25,11 @@ class CategoriaController extends Controller
 
         // Recupera todas as categorias com a contagem de produtos relacionados
         $categorias_count = Categoria::withCount('menus')->get();
+        
+        $categorias_names = Categoria::with('menus')->get();
 
 
-        return view('categoria.show', compact('categorias_count'), ['categoria' => $categoria]);
+        return view('categoria.show', compact('categorias_count', 'categorias_names'), ['categoria' => $categoria]);
     }
 
 

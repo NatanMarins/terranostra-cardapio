@@ -11,7 +11,6 @@
     
     <br>
 
-
     @forelse ($categorias as $categoria)
         
         <h3>{{ $categoria->categoria }}</h3>
