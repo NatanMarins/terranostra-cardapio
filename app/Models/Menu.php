@@ -15,6 +15,8 @@ class Menu extends Model
     // Colunas que podem ser cadastradas
     protected $fillable = ['nome', 'descricao', 'preco', 'categoria_id','product_file_name'];
 
+    protected $guarded = [];
+
 
     // Criar relacionamento
 

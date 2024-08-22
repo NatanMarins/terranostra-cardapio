@@ -10,7 +10,7 @@ class Categoria extends Model
     use HasFactory;
 
     // Indicar o nome da tabela
-    protected $table = 'categoria';
+    protected $table = 'categorias';
 
     // Colunas que podem ser cadastradas
     protected $fillable = ['categoria'];

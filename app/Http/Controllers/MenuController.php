@@ -7,10 +7,9 @@ use App\Http\Requests\MenuRequest;
 use App\Models\Categoria;
 use App\Models\Menu;
 use Exception;
-//use Illuminate\Container\Attributes\Storage;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
@@ -81,6 +80,31 @@ class MenuController extends Controller
 
 
     public function update(MenuRequest $request, Menu $menu){
+
+
+        $menu->update([
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'preco' => $request->preco,
+            'categoria_id' => $request->categoria_id,
+        ]);
+
+        if ($request->hasFile('product_file_name')) {
+            // Deletar a imagem antiga, se existir
+            if ($menu->product_file_name) {
+                Storage::disk('public')->delete($menu->product_file_name);
+            }
+
+            // Armazenar a nova imagem
+            $file = $request->file('product_file_name');
+            $file_name = rand(0, 999999) . '-' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads', $file_name, 'public'); // Salva em storage/app/public/uploads
+
+            // Atualizar o campo de imagem com o novo caminho
+            $menu->update(['product_file_name' => $path]);
+        }
+
+
         return redirect()->route('menu.show', ['menu' => $menu->id])->with('success', 'Produto editado com sucesso!');
     }
 

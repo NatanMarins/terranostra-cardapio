@@ -13,7 +13,7 @@ return new class extends Migration
     {
         // Adicionando coluna categoria (chave estrangeira)
         Schema::table('menu', function(Blueprint $table){
-            $table->foreignId('categoria_id')->constrained('categoria')->after('preco');
+            $table->foreignId('categoria_id')->constrained('categorias')->after('preco');
         });
     }
 
