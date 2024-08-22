@@ -79,8 +79,7 @@ class MenuController extends Controller
     }
 
 
-    public function update(MenuRequest $request, Menu $menu){
-
+    public function update(Request $request, Menu $menu){
 
         $menu->update([
             'nome' => $request->nome,
