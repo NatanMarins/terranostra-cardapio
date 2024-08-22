@@ -12,6 +12,12 @@
 
     <p>Categoria: {{ $categoria->categoria }}</p>
 
+    @foreach ($categorias_count as $categoria_count)
+        @if ($categoria_count->categoria == $categoria->categoria)
+            <p>Foram cadastrados {{ $categoria_count->menus_count}} produtos na categoria {{ $categoria->categoria }}</p>
+        @endif
+    @endforeach
+    
 
     <a href="{{ route('categoria.edit', ['categoria' => $categoria->id]) }}">
         <button>Editar</button>
