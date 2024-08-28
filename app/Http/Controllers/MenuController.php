@@ -17,15 +17,22 @@ class MenuController extends Controller
     public function index(){
 
         // Recuperar os registros do banco de dados
-        $produtos = Menu::orderBy('id', 'DESC')->get();
+        //$produtos = Menu::orderBy('id', 'DESC')->get();
 
-        return view('menu.index', ['produtos' => $produtos]);
+        $menus = Menu::with('categoria')->get();
+
+
+        return view('menu.index',compact('menus'));
     }
 
 
     public function show(Menu $menu){
 
-        return view('menu.show', ['menu' => $menu]);
+        $categoria = Menu:: with('categoria')->findOrFail($menu->id);
+
+        //dd($categoria);        
+
+        return view('menu.show', compact('categoria'), ['menu' => $menu]);
     }
 
 

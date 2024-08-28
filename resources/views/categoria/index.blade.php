@@ -3,6 +3,12 @@
 @section('content')
 
     <h2>Lista de produtos</h2>
+
+    <a href="{{ route('menu.index') }}">
+        <button type="button">produtos</button>
+    </a>
+
+
     <a href="{{ route('categoria.create') }}">
         <button>Cadastrar Nova Categoria</button>
     </a>

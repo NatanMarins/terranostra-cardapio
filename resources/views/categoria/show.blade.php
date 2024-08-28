@@ -6,44 +6,47 @@
 
     <x-alert/>
 
+
     <a href="{{ route('categoria.index') }}">
-        <button type="button">Lista de produtos</button>
+        <button type="button">Categorias</button>
     </a>
 
-    <h3>Categorias: {{ $categoria->categoria }}</h3>
+    <h1>Detalhes da Categoria: {{ $categorias_names->categoria }}</h1>
 
-    @foreach ($categorias_count as $categoria_count)
-        @if ($categoria_count->categoria == $categoria->categoria)
-            <p>Foram cadastrados {{ $categoria_count->menus_count}} produtos na categoria {{ $categoria->categoria }}</p>
-        @endif
-    @endforeach
+    <p>Foram cadastrados {{ $categorias_names->menus->count() }} produtos nesta categoria.</p>
 
+    @if($categorias_names->menus->isEmpty())
+        <p>Nenhum produto cadastrado nesta categoria.</p>
+    @else
+        <h2>Produtos Associados:</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Produto</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($categorias_names->menus as $menu)
+                    <tr>
+                        <td>{{ $menu->id }}</td>
+                        <td>{{ $menu->nome }}</td>
+                        <td>{{ $menu->descricao }}</td>
+                        <td>R$ {{ number_format($menu->preco, 2, ',', '.') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
     
-    @foreach ($categorias_names as $categoria_name)
 
-        @if ($categoria_name->categoria == $categoria->categoria)
-
-            @foreach ($categoria_name->menus as $item)
-            <ul>
-                <li>{{ $item->nome }}</li>
-            </ul>
-            @endforeach
-        
-        @endif
-
-    @endforeach
-
-
-
-
-
-    
-
-    <a href="{{ route('categoria.edit', ['categoria' => $categoria->id]) }}">
+    <a href="{{ route('categoria.edit', ['categoria' => $categorias_names->id]) }}">
         <button>Editar</button>
     </a>
 
-    <form action="{{ route('categoria.destroy', ['categoria' => $categoria->id]) }}" method="POST">
+    <form action="{{ route('categoria.destroy', ['categoria' => $categorias_names->id]) }}" method="POST">
         @csrf
         @method('delete')
 

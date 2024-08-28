@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
+use App\Models\Menu;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as DB;
@@ -21,15 +22,11 @@ class CategoriaController extends Controller
     }
 
 
-    public function show(Categoria $categoria){
+    public function show($categoria){
 
-        // Recupera todas as categorias com a contagem de produtos relacionados
-        $categorias_count = Categoria::withCount('menus')->get();
-        
-        $categorias_names = Categoria::with('menus')->get();
+        $categorias_names = Categoria::with('menus')->findOrFail($categoria);
 
-
-        return view('categoria.show', compact('categorias_count', 'categorias_names'), ['categoria' => $categoria]);
+        return view('categoria.show', compact('categorias_names'), ['categoria' => $categoria]);
     }
 
 
