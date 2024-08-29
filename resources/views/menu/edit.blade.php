@@ -96,11 +96,10 @@
                             
                             <div class="card-action">
                                 <button type="submit" onclick="return confirm('Confirmar Alterações')" class="btn btn-success">Editar</button>
-                                <button class="btn btn-danger">Cancelar</button>
+                                <button type="reset" class="btn btn-danger">Cancelar</button>
                             </div>                       
-                         
-
                         </form>
+
                             
                    
                         <!--Inserir o COnteudo da página -->

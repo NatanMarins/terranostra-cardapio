@@ -31,6 +31,14 @@ class MenuRequest extends FormRequest
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        // Tratar o valor do campo 'preco' substituindo vírgula por ponto
+        $this->merge([
+            'preco' => str_replace(',', '.', $this->preco),
+        ]);
+    }
+
     public function messages(): array
     {
         return [

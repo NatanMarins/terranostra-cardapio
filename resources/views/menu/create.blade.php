@@ -85,8 +85,8 @@
                             </div>    
                             
                             <div class="card-action">
-                                <button class="btn btn-success">Cadastrar</button>
-                                <button class="btn btn-danger">Cancel</button>
+                                <button type="submit" class="btn btn-success">Cadastrar</button>
+                                <button type="reset" class="btn btn-danger">Cancel</button>
                             </div>
                         </form>
 

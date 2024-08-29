@@ -51,7 +51,6 @@
                                     <table class="table table-striped table-bordered table-hover mt-3">
                                         <thead>
                                             <tr>
-                                                <th  scope="col">ID</th>
                                                 <th  scope="col">Nome do Produto</th>
                                                 <th  scope="col">Preço de Venda</th>
                                                 <th  scope="col">Preço Promocional</th>
@@ -63,10 +62,9 @@
                                         <tbody>
                                             @foreach($menus as $menu)
                                                 <tr>
-                                                    <td>{{ $menu->id }}</td>
                                                     <td>{{ $menu->nome }}</td>
                                                     <td>R$ {{ number_format($menu->preco, 2, ',', '.') }}</td>
-                                                    <td>R$ {{ number_format($menu->preco, 2, ',', '.') }}</td>
+                                                    <td>R$ {{ number_format($menu->preco_promocional, 2, ',', '.') }}</td>
                                                     <td>{{ $menu->categoria->categoria ?? 'Categoria não definida' }}</td>
                                                     <td>
                                                         @if($menu->product_file_name)
