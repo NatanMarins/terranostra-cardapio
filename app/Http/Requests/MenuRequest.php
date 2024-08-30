@@ -27,7 +27,7 @@ class MenuRequest extends FormRequest
             'descricao' => 'required',
             'preco' => 'required|numeric',
             'categoria_id' => 'required|exists:categorias,id',
-            'product_file_name' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048'
+            'product_file_name' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
 
