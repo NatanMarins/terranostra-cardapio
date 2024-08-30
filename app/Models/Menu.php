@@ -13,7 +13,7 @@ class Menu extends Model
     protected $table = 'menu';
 
     // Colunas que podem ser cadastradas
-    protected $fillable = ['nome', 'descricao', 'preco', 'categoria_id','product_file_name', 'preco_promocional'];
+    protected $fillable = ['nome', 'descricao', 'preco', 'categoria_id','product_file_name', 'preco_promocional', 'desconto_percentual'];
 
     protected $guarded = [];
 

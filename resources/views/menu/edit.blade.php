@@ -60,6 +60,14 @@
                                     <input type="text" name="preco" id="preco" placeholder="Valor do Produto" value="{{ old('preco', $menu->preco) }}" class="form-control">
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <label>Preço Promocional: </label>
+                                    <input type="text" name="preco_promocional" id="preco_promocional" placeholder="Valor Promocional" value="{{ old('preco_promocional', $menu->preco_promocional) }}" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Desconto %: </label>
+                                    <input type="text" name="desconto_percentual" id="desconto_percentual" placeholder="Valor Desconto %" value="{{ old('desconto_percentual', $menu->desconto_percentual) }}" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
                                     <label>Categoria: </label>
                                     <select id="categoria_id" name="categoria_id" class="form-select form-control">
                                         <option value="">Selecione uma Categoria</option>

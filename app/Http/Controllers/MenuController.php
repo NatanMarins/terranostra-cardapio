@@ -16,11 +16,7 @@ class MenuController extends Controller
 {
     public function index(){
 
-        // Recuperar os registros do banco de dados
-        //$produtos = Menu::orderBy('id', 'DESC')->get();
-
         $menus = Menu::with('categoria')->get();
-
 
         return view('menu.index',compact('menus'));
     }
@@ -30,9 +26,15 @@ class MenuController extends Controller
 
         $categoria = Menu:: with('categoria')->findOrFail($menu->id);
 
-        //dd($categoria);        
+        $descontoPercentual = (($categoria->preco - $categoria->preco_promocional) / $categoria->preco) * 100;
 
-        return view('menu.show', compact('categoria'), ['menu' => $menu]);
+        $precoPromocional = $categoria->preco - ($categoria->preco * $categoria->desconto_percentual / 100);
+
+
+
+        //dd($categoria->preco);
+
+        return view('menu.show', compact('categoria', 'descontoPercentual', 'precoPromocional'), ['menu' => $menu]);
     }
 
 
@@ -88,12 +90,67 @@ class MenuController extends Controller
 
     public function update(Request $request, Menu $menu){
 
+        // Tratamento dos valores monetários para garantir que estejam no formato correto
+        $request->merge([
+            'preco' => str_replace(',', '.', $request->preco),
+            'preco_promocional' => str_replace(',', '.', $request->preco_promocional),
+            'desconto_promocional' => str_replace(',', '.', $request->desconto_promocional),
+        ]);
+        
+        // Validação dos dados do formulário
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required',
+            'preco' => 'required|numeric',
+            'categoria_id' => 'required|exists:categorias,id',
+            'preco_promocional' => 'required|numeric',
+            'desconto_percentual' => 'required|numeric',
+        ], [
+            // Mensagens de erro
+            'nome.required' => 'O campo nome é obrigatório.',
+            'descricao.required' => 'O campo descrição é obrigatório.',
+            'preco.required' => 'O campo preço é obrigatório.',
+            'preco.numeric' => 'O campo preço deve ser um número.',
+            'categoria_id.required' => 'O campo categoria é obrigatório.',
+            'categoria_id.exists' => 'A categoria selecionada é inválida.',
+            'preco_promocional.required' => 'O campo preço promocional é obrigatório.',
+            'preco_promocional.numeric' => 'O campo preço promocional deve ser um número.',
+            'desconto_promocional.required' => 'O campo desconto promocional é obrigatório.',
+            'desconto_promocional.numeric' => 'O campo desconto promocional deve ser um número.',
+        ]);
+
         $menu->update([
             'nome' => $request->nome,
             'descricao' => $request->descricao,
             'preco' => $request->preco,
             'categoria_id' => $request->categoria_id,
         ]);
+
+        //Atualização de preço promocional e desconto percentual
+        $precoPromocional = $request->preco_promocional;
+        $descontoPercentual = $request->desconto_percentual;
+
+
+        if ($precoPromocional > 0 || $descontoPercentual > 0){
+
+            if ($precoPromocional > 0 && ($descontoPercentual=== null || $descontoPercentual <= 0)){
+                //Calcular o percentual de desconto baseado no preço promocional
+                $descontoPercentual = (($request->preco - $precoPromocional) / $request->preco) * 100;
+            }
+
+            if (($precoPromocional === null || $precoPromocional <= 0) && $descontoPercentual > 0){
+                //Calcular o preço promocional baseado no percentual de desconto
+                $precoPromocional = $request->preco - ($request->preco * ($descontoPercentual / 100));
+            }
+
+            // Atualizar o menu com os valores calculados
+            $menu->update([
+                'preco_promocional' => $precoPromocional,
+                'desconto_percentual' => $descontoPercentual,
+            ]);
+                
+        }
+
 
         if ($request->hasFile('product_file_name')) {
             // Deletar a imagem antiga, se existir

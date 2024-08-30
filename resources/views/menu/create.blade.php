@@ -47,11 +47,11 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label>Nome</label>
-                                    <input type="text" name="nome" id="nome" value="{{ old('name') }}" class="form-control">
+                                    <input type="text" name="nome" id="nome" value="{{ old('nome') }}" class="form-control">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Preço: </label>
-                                    <input type="text" name="preco" id="preco" placeholder="Valor do Produto" value="{{ old('name') }}" class="form-control">
+                                    <input type="text" name="preco" id="preco" placeholder="Valor do Produto" value="{{ old('preco') }}" class="form-control">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Categoria: </label>
