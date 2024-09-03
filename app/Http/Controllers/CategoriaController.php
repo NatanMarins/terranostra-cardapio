@@ -64,6 +64,7 @@ class CategoriaController extends Controller
 
 
     public function edit(Categoria $categoria){
+
         // Carrega a View
         return view('categoria.edit', ['categoria' => $categoria]);
     }

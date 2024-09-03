@@ -1,3 +1,24 @@
-<div>
-    <!-- I begin to speak only when I am certain what I will say is not better left unsaid. - Cato the Younger -->
-</div>
+@extends('layouts.admin')
+
+@section('content')
+
+    <h2>Cadastrar Novo Item</h2>
+
+    <a href="{{ route('empresa.index') }}">
+        <button type="button">Empresas</button>
+    </a>
+
+    <x-alert/>
+
+    <form action="{{ route('empresa.store') }}" method="POST">
+        @csrf
+        @method('POST')
+
+        <label>Empresa: </label>
+        <input type="text" name="nome" id="nome" placeholder="Nome da Empresa" value="{{ old('name') }}">
+
+        <button type="submit">Cadastrar</button>
+
+    </form>
+    
+@endsection
