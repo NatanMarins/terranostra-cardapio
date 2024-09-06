@@ -29,10 +29,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function store(UsuarioRequest $request){
-        
-        //Validar formulário
-        $request->validated();
+    public function store(Request $request){
 
         User::create([
             'name' => $request->name,
@@ -40,7 +37,7 @@ class UsuarioController extends Controller
             'password' => $request->password,
         ]);
 
-        return redirect()->route('usuario.create')->with('success', 'Categoria cadastrada com sucesso!');
+        return redirect()->route('usuario.create')->with('success', 'Cadastrado com sucesso!');
     }
 
 

@@ -4,6 +4,8 @@
 
     <h1>Cadastrar Novo Usuário</h1>
 
+    <x-alert/>
+
     <form action="{{ route('usuario.store') }}" method="POST">
         @csrf
         @method('POST')

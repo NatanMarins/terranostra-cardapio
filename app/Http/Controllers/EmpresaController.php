@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EmpresaRequest;
 use App\Models\Empresa;
 use Exception;
 use Illuminate\Http\Request;
@@ -29,13 +30,26 @@ class EmpresaController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(Request $request, Empresa $empresa){
 
         Empresa::create([
             'nome' => $request->nome,
+            'razao_social' => $request->razao_social,
+            'cnpj' => $request->cnpj,
+            'responsavel' => $request->responsavel,
+            'telefone' => $request->telefone,
+            'email' => $request->email,
+            'cep' => $request->cep,
+            'estado' => $request->estado,
+            'cidade' => $request->cidade,
+            'bairro' => $request->bairro,
+            'rua' => $request->rua,
+            'numero_endereco' => $request->numero_endereco,
+            'complemento' => $request->complemento,
+
         ]);
 
-        return redirect()->route('empresa.create')->with('success', 'Categoria cadastrada com sucesso!');
+        return redirect()->route('empresa.index')->with('success', 'Categoria cadastrada com sucesso!');
     }
 
 

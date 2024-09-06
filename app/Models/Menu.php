@@ -23,4 +23,10 @@ class Menu extends Model
     public function categoria(){
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
+
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
 }

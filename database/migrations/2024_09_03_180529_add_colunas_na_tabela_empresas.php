@@ -18,11 +18,13 @@ return new class extends Migration
             $table->string('telefone');
             $table->string('responsavel');
             $table->string('email');
+            $table->string('cep');
             $table->string('numero_endereco');
             $table->string('rua');
             $table->string('bairro');
             $table->string('cidade');
             $table->string('estado');
+            $table->text('complemento');
         });
     }
 
@@ -31,18 +33,20 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('empresa', function(Blueprint $table) {
+        Schema::table('empresas', function(Blueprint $table) {
             $table->dropColumn('razao_social');
             $table->dropColumn('cnpj');
             $table->dropColumn('situacao');
             $table->dropColumn('telefone');
             $table->dropColumn('responsavel');
             $table->dropColumn('email');
+            $table->dropColumn('cep');
             $table->dropColumn('numero_endereco');
             $table->dropColumn('rua');
             $table->dropColumn('bairro');
             $table->dropColumn('cidade');
             $table->dropColumn('estado');
+            $table->dropColumn('complemento');
         });
     }
 };
