@@ -31,10 +31,16 @@ class UsuarioController extends Controller
 
     public function store(Request $request){
 
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6'
+        ]);
+
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => $validated['password'],
         ]);
 
         return redirect()->route('usuario.create')->with('success', 'Cadastrado com sucesso!');

@@ -2,13 +2,15 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// Login
+Route::get('/', [LoginController::class, 'index'])->name('login.index');
+
 
 // Usuário
 Route::get('/index-usuario', [UsuarioController::class, 'index'])->name('usuario.index');

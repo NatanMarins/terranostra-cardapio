@@ -2,23 +2,26 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\Menu;
+use App\Policies\MenuPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
-class AppServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
+    protected $policies = [
+        Menu::class => MenuPolicy::class,
+    ];
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
+    public function boot()
     {
-        //
+        $this->registerPolicies();
+
+        // Gate global para superadmin
+        Gate::before(function ($user, $ability) {
+            if ($user->role === 'superadmin') {
+                return true;
+            }
+        });
     }
 }
