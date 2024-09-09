@@ -300,8 +300,12 @@
                             <img src="assets/img/profile.jpg"  alt="..."  class="avatar-img rounded-circle"  />
                             </div>
                             <span class="profile-username">
-                            <span class="op-7">Hi,</span>
-                            <span class="fw-bold">Hizrian</span>
+                            <span class="op-7">Olá,</span>
+                            <span class="fw-bold">
+                                @if (auth()->check())
+                                    {{ auth()->user()->name }}
+                                @endif
+                            </span>
                             </span>
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -312,8 +316,16 @@
                                     <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
                                 </div>
                                 <div class="u-text">
-                                    <h4>Hizrian</h4>
-                                    <p class="text-muted">hello@example.com</p>
+                                    <h4>
+                                        @if (auth()->check())
+                                            {{ auth()->user()->name }}
+                                        @endif
+                                    </h4>
+                                    <p class="text-muted">
+                                        @if (auth()->check())
+                                            {{ auth()->user()->email }}
+                                        @endif
+                                    </p>
                                     <a href="profile.html" class="btn btn-xs btn-secondary btn-sm" >Ver Perfil</a>
                                 </div>
                                 </div>
@@ -324,7 +336,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Configurações</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i>  Sair</a>
+                                <a class="dropdown-item" href="{{ route('login.destroy') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i>  Sair</a>
                             </li>
                             </div>
                         </ul>

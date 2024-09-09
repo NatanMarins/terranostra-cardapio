@@ -4,7 +4,12 @@
 
 <h3>Login</h3>
 
-<form>
+<x-alert/>
+
+<form action="{{ route('login.process') }}" method="POST">
+
+    @csrf
+
     <label for="email">E-mail</label>
     <input type="text" name="email" id="email" type="email" placeholder="E-mail de Usuário">
 
