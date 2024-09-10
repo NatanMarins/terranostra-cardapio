@@ -332,9 +332,9 @@
                             </li>
                             <li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Meu Perfil</a>
+                                <a class="dropdown-item" href="{{ route('profile.show') }}"><i class="fa-solid fa-user"></i> Meu Perfil</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Configurações</a>
+                                <a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fa-solid fa-gear"></i> Configurações</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('login.destroy') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i>  Sair</a>
                             </li>
