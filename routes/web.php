@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
@@ -22,6 +23,7 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'submitForgotP
 Route::post('/reset-password/{token}', [ForgotPasswordController::class, 'submitResetPassword'])->name('password.reset');
 
 
+
 // Middleware
 Route::group(['middleware' => 'auth'], function () {
 
@@ -31,6 +33,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/edit-profile-password', [ProfileController::class, 'editPassword'])->name('profile.edit-password');
     Route::put('/update-profile-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+
+
+    // Usuário
+    Route::get('/cardapio', [DashboardController::class, 'index'])->name('dashboard.dashboard');
+
 
     // Usuário
     Route::get('/index-usuario', [UsuarioController::class, 'index'])->name('usuario.index');
@@ -56,13 +63,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // Cardápio
-    Route::get('/index-cardapio', [MenuController::class, 'index'])->name('menu.index');
-    Route::get('/show-cardapio/{menu}', [MenuController::class, 'show'])->name('menu.show');
-    Route::get('/create-cardapio', [MenuController::class, 'create'])->name('menu.create');
-    Route::post('/store-cardapio', [MenuController::class, 'store'])->name('menu.store');
-    Route::get('/edit-cardapio/{menu}', [MenuController::class, 'edit'])->name('menu.edit');
-    Route::put('/update-cardapio/{menu}', [MenuController::class, 'update'])->name('menu.update');
-    Route::delete('/destroy-cardapio/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
+    Route::get('/index-cardapio', [MenuController::class, 'index'])->name('menu.index')->middleware('permission:index-cardapio');
+    Route::get('/show-cardapio/{menu}', [MenuController::class, 'show'])->name('menu.show')->middleware('permission:show-cardapio');
+    Route::get('/create-cardapio', [MenuController::class, 'create'])->name('menu.create')->middleware('permission:create-cardapio');
+    Route::post('/store-cardapio', [MenuController::class, 'store'])->name('menu.store')->middleware('permission:create-cardapio');
+    Route::get('/edit-cardapio/{menu}', [MenuController::class, 'edit'])->name('menu.edit')->middleware('permission:edit-cardapio');
+    Route::put('/update-cardapio/{menu}', [MenuController::class, 'update'])->name('menu.update')->middleware('permission:edit-cardapio');
+    Route::delete('/destroy-cardapio/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy')->middleware('permission:destroy-cardapio');
 
 
     // Categoria

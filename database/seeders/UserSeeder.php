@@ -15,27 +15,36 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         if (!User::where('email', 'natan@teste.com.br')->first()) {
-            User::create([
+            $superAdmin = User::create([
                 'name' => 'natan',
                 'email' => 'natan@teste.com.br',
                 'password' => Hash::make('123456a', ['rounds' => 12])
             ]);
+
+            // Atribuindo papel para usuário
+            $superAdmin->assignRole('Super Admin');
         }
         
         if (!User::where('email', 'manu@teste.com.br')->first()) {
-            User::create([
+            $user = User::create([
                 'name' => 'manu',
                 'email' => 'manu@teste.com.br',
                 'password' => Hash::make('123456a', ['rounds' => 12])
             ]);
+
+            // Atribuindo papel para usuário
+            $user->assignRole('User');
         }
         
         if (!User::where('email', 'bruna@teste.com.br')->first()) {
-            User::create([
+            $admin = User::create([
                 'name' => 'bruna',
                 'email' => 'bruna@teste.com.br',
                 'password' => Hash::make('123456a', ['rounds' => 12])
             ]);
+
+            // Atribuindo papel para usuário
+            $admin->assignRole('Admin');
         }
         
         if (!User::where('email', 'ronaldo@teste.com.br')->first()) {
@@ -44,6 +53,9 @@ class UserSeeder extends Seeder
                 'email' => 'ronaldo@teste.com.br',
                 'password' => Hash::make('123456a', ['rounds' => 12])
             ]);
+
+            // Atribuindo papel para usuário
+            $superAdmin->assignRole('Super Admin');
         }
     }
 }

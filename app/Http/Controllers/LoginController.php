@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class LoginController extends Controller
 {
@@ -33,6 +35,20 @@ class LoginController extends Controller
             // Redirecionar para página de login com mensagem de erro
             return back()->withInput()->with('error', 'E-mail ou senha inválido!');
         }
+
+        // Obter o usuário autenticado
+        $user = Auth::user();
+        $user = User::find($user->id);
+
+        // Verificar permições
+        if($user->hasRole('Super Admin')){
+            $permissions = Permission::pluck('name')->toArray();
+        }else{
+            $permissions = $user->getPermissionsViaRoles()->pluck('name')->toArray();
+        }
+
+        $user->syncPermissions($permissions);
+
 
         // Redirecionar o usuário
         return redirect()->route('menu.index');
