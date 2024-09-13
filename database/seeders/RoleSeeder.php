@@ -13,15 +13,15 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        if(!Role::where('name', 'Super Admin')->first()){
+        if (!Role::where('name', 'Super Admin')->first()) {
             Role::create([
-            'name' => 'Super Admin',
+                'name' => 'Super Admin',
             ]);
         }
 
-        if(!Role::where('name', 'Admin')->first()){
+        if (!Role::where('name', 'Admin')->first()) {
             $admin = Role::create([
-            'name' => 'Admin',
+                'name' => 'Admin',
             ]);
 
             // Dar permissão para o papel
@@ -31,18 +31,29 @@ class RoleSeeder extends Seeder
                 'create-cardapio',
                 'edit-cardapio',
                 'destroy-cardapio',
+
+                'index-categoria',
+                'show-categoria',
+                'create-categoria',
+                'edit-categoria',
+                'destroy-categoria',
             ]);
         }
 
-        if(!Role::where('name', 'User')->first()){
+
+
+        if (!Role::where('name', 'User')->first()) {
             $user = Role::create([
-            'name' => 'User',
+                'name' => 'User',
             ]);
 
             // Dar permissão para o papel
             $user->givePermissionTo([
                 'index-cardapio',
                 'show-cardapio',
+
+                'index-categoria',
+                'show-categoria',
             ]);
         }
     }

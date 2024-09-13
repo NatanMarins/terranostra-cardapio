@@ -4,7 +4,7 @@
 
     <h1>Cadastrar Novo Usuário</h1>
 
-    <x-alert/>
+    <x-alert />
 
     <form action="{{ route('usuario.store') }}" method="POST">
         @csrf
@@ -18,6 +18,21 @@
 
         <label>Senha: </label>
         <input type="password" name="password" id="password" value="{{ old('password') }}" class="form-control">
+
+        <label>Papel: </label>
+        <select name="roles" id="roles" class="form-select">
+            <option value="">Selecione</option>
+            @forelse ($roles as $role)
+                @if ($role != 'Super Admin')
+                    <option {{ old('roles') == $role ? 'selected' : '' }} value="{{ $role }}">{{ $role }}</option>
+                @else
+                    @if (Auth::user()->hasRole('Super Admin'))
+                        <option {{ old('roles') == $role ? 'selected' : '' }} value="{{ $role }}">{{ $role }}</option>
+                    @endif
+                @endif
+            @empty
+            @endforelse
+        </select>
 
         <button type="submit" class="btn btn-success">Cadastrar</button>
         <button type="reset" class="btn btn-danger">Cancel</button>

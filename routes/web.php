@@ -73,11 +73,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // Categoria
-    Route::get('/index-categoria', [CategoriaController::class, 'index'])->name('categoria.index');
-    Route::get('/show-categoria/{categoria}', [CategoriaController::class, 'show'])->name('categoria.show');
-    Route::get('/create-categoria', [CategoriaController::class, 'create'])->name('categoria.create');
-    Route::post('/store-categoria', [CategoriaController::class, 'store'])->name('categoria.store');
-    Route::get('/edit-categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.edit');
-    Route::put('/update-categoria/{categoria}', [CategoriaController::class, 'update'])->name('categoria.update');
-    Route::delete('/destroy-categoria/{categoria}', [CategoriaController::class, 'destroy'])->name('categoria.destroy');
+    Route::get('/index-categoria', [CategoriaController::class, 'index'])->name('categoria.index')->middleware('permission:index-categoria');
+    Route::get('/show-categoria/{categoria}', [CategoriaController::class, 'show'])->name('categoria.show')->middleware('permission:show-categoria');
+    Route::get('/create-categoria', [CategoriaController::class, 'create'])->name('categoria.create')->middleware('permission:create-categoria');
+    Route::post('/store-categoria', [CategoriaController::class, 'store'])->name('categoria.store')->middleware('permission:create-categoria');
+    Route::get('/edit-categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.edit')->middleware('permission:edit-categoria');
+    Route::put('/update-categoria/{categoria}', [CategoriaController::class, 'update'])->name('categoria.update')->middleware('permission:edit-categoria');
+    Route::delete('/destroy-categoria/{categoria}', [CategoriaController::class, 'destroy'])->name('categoria.destroy')->middleware('permission:destroy-categoria');
 });

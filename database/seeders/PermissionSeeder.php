@@ -14,11 +14,19 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+            // Permissões menu
             'index-cardapio',
             'show-cardapio',
             'create-cardapio',
             'edit-cardapio',
             'destroy-cardapio',
+
+            // Permissões categoria
+            'index-categoria',
+            'show-categoria',
+            'create-categoria',
+            'edit-categoria',
+            'destroy-categoria',
         ];
 
         foreach($permissions as $permission){

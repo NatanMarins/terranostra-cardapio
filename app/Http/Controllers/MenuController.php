@@ -181,7 +181,7 @@ class MenuController extends Controller
             //Redirecionar o usuário
             return redirect()->route('menu.index')->with('success', 'Produto excluido com sucesso!');
         } catch(Exception $e){
-            return redirect()->route('menu.index')->with('error', 'Produto não escluído!');
+            return redirect()->route('menu.index')->with('error', 'Produto não excluído!');
         }
     }
 }
