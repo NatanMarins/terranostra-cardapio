@@ -19,6 +19,35 @@ class RoleSeeder extends Seeder
             ]);
         }
 
+
+        if (!Role::where('name', 'Representante Admin')->first()) {
+            $admin = Role::create([
+                'name' => 'Representante Admin',
+            ]);
+
+            // Dar permissão para o papel
+            $admin->givePermissionTo([
+                'index-cardapio',
+                'show-cardapio',
+                'create-cardapio',
+                'edit-cardapio',
+                'destroy-cardapio',
+
+                'index-categoria',
+                'show-categoria',
+                'create-categoria',
+                'edit-categoria',
+                'destroy-categoria',
+
+                'index-usuario',
+                'show-usuario',
+                'create-usuario',
+                'edit-usuario',
+                'destroy-usuario',
+            ]);
+        }
+
+
         if (!Role::where('name', 'Admin')->first()) {
             $admin = Role::create([
                 'name' => 'Admin',
@@ -37,6 +66,9 @@ class RoleSeeder extends Seeder
                 'create-categoria',
                 'edit-categoria',
                 'destroy-categoria',
+
+                'index-usuario',
+                'show-usuario',
             ]);
         }
 
@@ -54,6 +86,9 @@ class RoleSeeder extends Seeder
 
                 'index-categoria',
                 'show-categoria',
+
+                'index-usuario',
+                'show-usuario',
             ]);
         }
     }

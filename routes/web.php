@@ -23,6 +23,10 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'submitForgotP
 Route::post('/reset-password/{token}', [ForgotPasswordController::class, 'submitResetPassword'])->name('password.reset');
 
 
+// Cardápio para cliente
+Route::get('/cardapio', [DashboardController::class, 'index'])->name('dashboard.dashboard');
+
+
 
 // Middleware
 Route::group(['middleware' => 'auth'], function () {
@@ -33,10 +37,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/edit-profile-password', [ProfileController::class, 'editPassword'])->name('profile.edit-password');
     Route::put('/update-profile-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
-
-
-    // Usuário
-    Route::get('/cardapio', [DashboardController::class, 'index'])->name('dashboard.dashboard');
 
 
     // Usuário
