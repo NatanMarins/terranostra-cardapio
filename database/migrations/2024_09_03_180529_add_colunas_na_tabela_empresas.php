@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('cnpj');
             $table->string('situacao')->default('ativo');
             $table->string('telefone');
-            $table->string('responsavel');
             $table->string('email');
             $table->string('cep');
             $table->string('numero_endereco');
@@ -38,7 +37,6 @@ return new class extends Migration
             $table->dropColumn('cnpj');
             $table->dropColumn('situacao');
             $table->dropColumn('telefone');
-            $table->dropColumn('responsavel');
             $table->dropColumn('email');
             $table->dropColumn('cep');
             $table->dropColumn('numero_endereco');

@@ -18,7 +18,8 @@ class UserSeeder extends Seeder
             $superAdmin = User::create([
                 'name' => 'natan',
                 'email' => 'natan@teste.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 12])
+                'password' => Hash::make('123456a', ['rounds' => 12]),
+                'empresa_id' => 1,
             ]);
 
             // Atribuindo papel para usuário
@@ -29,7 +30,8 @@ class UserSeeder extends Seeder
             $user = User::create([
                 'name' => 'manu',
                 'email' => 'manu@teste.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 12])
+                'password' => Hash::make('123456a', ['rounds' => 12]),
+                'empresa_id' => 1,
             ]);
 
             // Atribuindo papel para usuário
@@ -40,7 +42,8 @@ class UserSeeder extends Seeder
             $admin = User::create([
                 'name' => 'bruna',
                 'email' => 'bruna@teste.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 12])
+                'password' => Hash::make('123456a', ['rounds' => 12]),
+                'empresa_id' => 1,
             ]);
 
             // Atribuindo papel para usuário
@@ -51,7 +54,8 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => 'ronaldo',
                 'email' => 'ronaldo@teste.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 12])
+                'password' => Hash::make('123456a', ['rounds' => 12]),
+                'empresa_id' => 1,
             ]);
 
             // Atribuindo papel para usuário

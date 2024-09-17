@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('menu', function (Blueprint $table) {
+        Schema::table('categorias', function (Blueprint $table) {
             $table->unsignedBigInteger('empresa_id');
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade');
         });
@@ -22,8 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('menu', function (Blueprint $table) {
-            // Remove a chave estrangeira e a coluna
+        Schema::table('categorias', function (Blueprint $table) {
             $table->dropForeign(['empresa_id']);
             $table->dropColumn('empresa_id');
         });

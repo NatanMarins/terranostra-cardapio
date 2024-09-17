@@ -27,6 +27,7 @@ Route::post('/reset-password/{token}', [ForgotPasswordController::class, 'submit
 Route::get('/cardapio', [DashboardController::class, 'index'])->name('dashboard.dashboard');
 
 
+//Route::group(['middleware' => ['auth', 'empresa']], function ()
 
 // Middleware
 Route::group(['middleware' => 'auth'], function () {

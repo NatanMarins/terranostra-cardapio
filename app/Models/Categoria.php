@@ -19,4 +19,9 @@ class Categoria extends Model
     public function menus(){
         return $this->hasMany(Menu::class, 'categoria_id');
     }
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
 }
