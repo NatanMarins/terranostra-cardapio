@@ -86,9 +86,6 @@ class RoleSeeder extends Seeder
 
                 'index-categoria',
                 'show-categoria',
-
-                'index-usuario',
-                'show-usuario',
             ]);
         }
     }
