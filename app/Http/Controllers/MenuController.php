@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MenuRequest;
 use App\Models\Categoria;
 use App\Models\Menu;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,15 +26,12 @@ class MenuController extends Controller
 
     public function show(Menu $menu){
 
-        $categoria = Menu:: with('categoria')->findOrFail($menu->id);
+        $categoria = Menu::with('categoria')->findOrFail($menu->id);
 
         $descontoPercentual = (($categoria->preco - $categoria->preco_promocional) / $categoria->preco) * 100;
 
         $precoPromocional = $categoria->preco - ($categoria->preco * $categoria->desconto_percentual / 100);
 
-
-
-        //dd($categoria->preco);
 
         return view('menu.show', compact('categoria', 'descontoPercentual', 'precoPromocional'), ['menu' => $menu]);
     }
@@ -51,6 +50,8 @@ class MenuController extends Controller
         //Validar formulário
         $request->validated();
 
+        $empresa_id = User::where('empresa_id', Auth::id())->first();
+
         DB::beginTransaction();
         
         try{
@@ -60,6 +61,7 @@ class MenuController extends Controller
 
             $data = $request->all();
             $data['product_file_name'] = $path;
+            $data['empresa_id'] = $empresa_id->empresa_id;
 
             //Cadastrar no banco de dados
             Menu::create($data);

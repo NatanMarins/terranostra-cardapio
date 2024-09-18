@@ -41,7 +41,7 @@
 
         </table>
         
-        
+        <a href="{{ route('empresa_profile.show') }}">Perfil</a>
 
 
             

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,7 @@ class Categoria extends Model
     protected $table = 'categorias';
 
     // Colunas que podem ser cadastradas
-    protected $fillable = ['categoria'];
+    protected $fillable = ['categoria', 'empresa_id'];
 
     // Criar relacionamento
     public function menus(){

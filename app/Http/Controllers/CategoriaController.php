@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
 use App\Models\Menu;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB as DB;
 use Illuminate\Support\Facades\Facade;
 
@@ -37,15 +39,18 @@ class CategoriaController extends Controller
 
 
     public function store(CategoriaRequest $request){
-
+    
         //Validar formulário
         $request->validated();
+
+        $empresa_id = User::where('empresa_id', Auth::id())->first();
 
         DB::beginTransaction();
         
         try{
             Categoria::create([
                 'categoria' => $request->categoria,
+                'empresa_id'=>$empresa_id->empresa_id,
             ]);
 
             //Operação concluída com êxito

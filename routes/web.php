@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\EmpresaPerfilController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
@@ -38,6 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/edit-profile-password', [ProfileController::class, 'editPassword'])->name('profile.edit-password');
     Route::put('/update-profile-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+
+
+    // Perfil Empresa
+    Route::get('/show-profile-empresa', [EmpresaPerfilController::class, 'show'])->name('empresa_profile.show');
+    Route::get('/edit-profile-empresa', [EmpresaPerfilController::class, 'edit'])->name('empresa_profile.edit');
+    Route::put('/update-profile-empresa', [EmpresaPerfilController::class, 'update'])->name('empresa_profile.update');
 
 
     // Usuário
