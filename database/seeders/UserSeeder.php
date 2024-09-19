@@ -59,7 +59,43 @@ class UserSeeder extends Seeder
             ]);
 
             // Atribuindo papel para usuário
-            $superAdmin->assignRole('Super Admin');
+            $superAdmin->assignRole('Representante Admin');
+        }
+
+        if (!User::where('email', 'benjamin@teste.com.br')->first()) {
+            $admin = User::create([
+                'name' => 'Benjamin',
+                'email' => 'benjamin@teste.com.br',
+                'password' => Hash::make('123456a', ['rounds' => 12]),
+                'empresa_id' => 2,
+            ]);
+
+            // Atribuindo papel para usuário
+            $admin->assignRole('Representante Admin');
+        }
+
+        if (!User::where('email', 'gamora@teste.com.br')->first()) {
+            $admin = User::create([
+                'name' => 'Gamora',
+                'email' => 'gamora@teste.com.br',
+                'password' => Hash::make('123456a', ['rounds' => 12]),
+                'empresa_id' => 2,
+            ]);
+
+            // Atribuindo papel para usuário
+            $admin->assignRole('Admin');
+        }
+
+        if (!User::where('email', 'anakin@teste.com.br')->first()) {
+            $admin = User::create([
+                'name' => 'Anakin',
+                'email' => 'anakin@teste.com.br',
+                'password' => Hash::make('123456a', ['rounds' => 12]),
+                'empresa_id' => 2,
+            ]);
+
+            // Atribuindo papel para usuário
+            $admin->assignRole('User');
         }
     }
 }

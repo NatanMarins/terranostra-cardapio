@@ -21,10 +21,12 @@
             <option value="">Selecione</option>
             @forelse ($roles as $role)
                 @if ($role != 'Super Admin')
-                    <option {{ old('roles', $usuarioRoles) == $role ? 'selected' : '' }} value="{{ $role }}">{{ $role }}</option>
+                    <option {{ old('roles', $usuarioRoles) == $role ? 'selected' : '' }} value="{{ $role }}">
+                        {{ $role }}</option>
                 @else
                     @if (Auth::user()->hasRole('Super Admin'))
-                        <option {{ old('roles', $usuarioRoles) == $role ? 'selected' : '' }} value="{{ $role }}">{{ $role }}</option>
+                        <option {{ old('roles', $usuarioRoles) == $role ? 'selected' : '' }} value="{{ $role }}">
+                            {{ $role }}</option>
                     @endif
                 @endif
             @empty

@@ -23,9 +23,6 @@
         <label>CNPJ: </label>
         <input type="text" name="cnpj" id="cnpj" placeholder="CNPJ" value="{{ old('name') }}">
 
-        <label>Responsável: </label>
-        <input type="text" name="responsavel" id="responsavel" placeholder="Responsável" value="{{ old('name') }}">
-
         <label>Telefone: </label>
         <input type="text" name="telefone" id="telefone" placeholder="Telefone" value="{{ old('name') }}">
 

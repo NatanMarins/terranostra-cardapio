@@ -31,12 +31,14 @@ Route::get('/cardapio', [DashboardController::class, 'index'])->name('dashboard.
 //Route::group(['middleware' => ['auth', 'empresa']], function ()
 
 // Middleware
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'empresa']], function () {
 
     // Perfil
     Route::get('/show-profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/edit-profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/update-profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/edit-profile-foto', [ProfileController::class, 'editFoto'])->name('profile.edit-foto');
+    Route::put('/update-profile-foto', [ProfileController::class, 'updateFoto'])->name('profile.update-foto');
     Route::get('/edit-profile-password', [ProfileController::class, 'editPassword'])->name('profile.edit-password');
     Route::put('/update-profile-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
 

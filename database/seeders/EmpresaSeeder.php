@@ -30,5 +30,22 @@ class EmpresaSeeder extends Seeder
             'complemento' => '',
             
         ]);
+
+        Empresa::create([
+            'nome' => 'Cântico',
+            'razao_social' => 'Ronaldo Lucena',
+            'cnpj' => '12345678000910',
+            'situacao' => 'ativa',
+            'telefone' => '21969726974',
+            'email' => 'contato@empresaexemplo2.com',
+            'cep' => '24440560',
+            'numero_endereco' => '321',
+            'rua' => 'Rua Exemplo 1',
+            'bairro' => 'Bairro Exemplo 1',
+            'cidade' => 'Cidade Exemplo 1',
+            'estado' => 'Estado Exemplo 1',
+            'complemento' => '',
+            
+        ]);
     }
 }

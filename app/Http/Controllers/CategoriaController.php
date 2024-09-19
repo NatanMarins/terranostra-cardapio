@@ -17,16 +17,17 @@ class CategoriaController extends Controller
 {
     public function index(){
 
-        // Recuperar os registros do banco de dados
-        $categorias = Categoria::orderBy('id', 'DESC')->get();
+        $empresaId = Auth::user()->empresa_id;
+        $categorias = Categoria::where('empresa_id', $empresaId)->get();
 
-        return view('categoria.index', ['categorias' => $categorias]);
+        return view('categoria.index', compact('categorias'));
     }
 
 
     public function show($categoria){
 
         $categorias_names = Categoria::with('menus')->findOrFail($categoria);
+
 
         return view('categoria.show', compact('categorias_names'), ['categoria' => $categoria]);
     }
@@ -43,14 +44,15 @@ class CategoriaController extends Controller
         //Validar formulário
         $request->validated();
 
-        $empresa_id = User::where('empresa_id', Auth::id())->first();
+        $empresa_id = Auth::user()->empresa_id;
+
 
         DB::beginTransaction();
         
         try{
             Categoria::create([
                 'categoria' => $request->categoria,
-                'empresa_id'=>$empresa_id->empresa_id,
+                'empresa_id'=>$empresa_id,
             ]);
 
             //Operação concluída com êxito

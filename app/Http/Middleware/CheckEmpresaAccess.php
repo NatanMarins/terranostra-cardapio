@@ -18,6 +18,11 @@ class CheckEmpresaAccess
     {
         $user = Auth::user();
 
+        // Permitir que o superadmin tenha acesso total
+        if ($user->role === 'Super Admin') {
+            return $next($request);
+        }
+
         // Verifique se o usuário está logado e tem uma empresa associada
         if (!$user || !$user->empresa) {
             abort(403, 'Acesso negado.');

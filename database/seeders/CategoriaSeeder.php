@@ -13,16 +13,44 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        Categoria::create(['categoria' => 'Pizza']);
-        Categoria::create(['categoria' => 'Bebidas']);
-        Categoria::create(['categoria' => 'Sobremesas']);
-        Categoria::create(['categoria' => 'Vegetariano']);
-        Categoria::create(['categoria' => 'Japonês']);
-        Categoria::create(['categoria' => 'Carnes']);
-        Categoria::create(['categoria' => 'Saladas']);
-        Categoria::create(['categoria' => 'Adicionais']);
-        Categoria::create(['categoria' => 'Drinks']);
-        Categoria::create(['categoria' => 'Infantil']);
+        Categoria::create([
+            'categoria' => 'Pizza',
+            'empresa_id' => '1',
+        ]);
 
+        Categoria::create([
+            'categoria' => 'Bebidas',
+            'empresa_id' => '1',
+        ]);
+
+        Categoria::create([
+            'categoria' => 'Sobremesas',
+            'empresa_id' => '1',
+        ]);
+
+        Categoria::create([
+            'categoria' => 'Vegetariano',
+            'empresa_id' => '1',
+        ]);
+       
+        Categoria::create([
+            'categoria' => 'Japonês',
+            'empresa_id' => '2',
+        ]);
+
+        Categoria::create([
+            'categoria' => 'Carnes',
+            'empresa_id' => '2',
+        ]);
+
+        Categoria::create([
+            'categoria' => 'Saladas',
+            'empresa_id' => '2',
+        ]);
+
+        Categoria::create([
+            'categoria' => 'Adicionais',
+            'empresa_id' => '2',
+        ]);
     }
 }

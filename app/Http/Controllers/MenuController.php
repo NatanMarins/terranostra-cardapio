@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MenuRequest;
 use App\Models\Categoria;
+use App\Models\Empresa;
 use App\Models\Menu;
 use App\Models\User;
 use Exception;
@@ -18,7 +19,9 @@ class MenuController extends Controller
 {
     public function index(){
 
-        $menus = Menu::with('categoria')->get();
+        $empresaId = Auth::user()->empresa_id;
+
+        $menus = Menu::where('empresa_id', $empresaId)->get();
 
         return view('menu.index',compact('menus'));
     }
@@ -39,9 +42,11 @@ class MenuController extends Controller
 
     public function create(){
 
+        $empresa_id = Auth::user()->empresa_id;
+
         $categorias = Categoria::all();
 
-        return view('menu.create', compact('categorias'));
+        return view('menu.create', compact('categorias', 'empresa_id'));
     }
 
 
@@ -50,7 +55,8 @@ class MenuController extends Controller
         //Validar formulário
         $request->validated();
 
-        $empresa_id = User::where('empresa_id', Auth::id())->first();
+        $empresa_id = Auth::user()->empresa_id;
+
 
         DB::beginTransaction();
         
@@ -61,7 +67,7 @@ class MenuController extends Controller
 
             $data = $request->all();
             $data['product_file_name'] = $path;
-            $data['empresa_id'] = $empresa_id->empresa_id;
+            $data['empresa_id'] = $empresa_id;
 
             //Cadastrar no banco de dados
             Menu::create($data);

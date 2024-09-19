@@ -8,20 +8,18 @@
         <button>Cadastrar Empresa</button>
     </a>
 
-    <x-alert/>
+    <x-alert />
 
     @if ($empresas->isEmpty())
         <p>Nenhuma empresa encontrado!</p>
-
     @else
-
         <table>
 
             <thead>
                 <th>Nome da Empresa:</th>
                 <th></th>
             </thead>
-            
+
             <tbody>
 
                 @foreach ($empresas as $empresa)
@@ -40,13 +38,8 @@
             </tbody>
 
         </table>
-        
+
         <a href="{{ route('empresa_profile.show') }}">Perfil</a>
-
-
-            
-        
-
     @endif
 
 
