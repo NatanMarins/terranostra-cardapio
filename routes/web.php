@@ -8,6 +8,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -90,4 +91,8 @@ Route::group(['middleware' => ['auth', 'empresa']], function () {
     Route::get('/edit-categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.edit')->middleware('permission:edit-categoria');
     Route::put('/update-categoria/{categoria}', [CategoriaController::class, 'update'])->name('categoria.update')->middleware('permission:edit-categoria');
     Route::delete('/destroy-categoria/{categoria}', [CategoriaController::class, 'destroy'])->name('categoria.destroy')->middleware('permission:destroy-categoria');
+
+
+    // Papéis
+    Route::get('/index-role', [RoleController::class, 'index'])->name('role.index')->middleware('permission:index-role');
 });

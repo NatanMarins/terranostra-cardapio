@@ -104,7 +104,7 @@
                             </a>
                         </li>
 
-                        
+
 
                         <li class="nav-item">
                             <a href="{{ route('categoria.index') }}">
@@ -316,8 +316,14 @@
                                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                                     aria-expanded="false">
                                     <div class="avatar-sm">
-                                        <img src="assets/img/profile.jpg" alt="..."
-                                            class="avatar-img rounded-circle" />
+                                        <!-- Verifique se o usuário está autenticado e exiba a imagem de perfil -->
+                                        @if (Auth::check())
+                                            <div class="user-profile">
+                                                <img src="{{ Auth::user()->foto_perfil ? asset('storage/' . Auth::user()->foto_perfil) : asset('images/default-avatar.png') }}"
+                                                    alt="Foto de perfil" width="50" height="50"
+                                                    class="avatar-img rounded-circle">
+                                            </div>
+                                        @endif
                                     </div>
                                     <span class="profile-username">
                                         <span class="op-7">Olá,</span>

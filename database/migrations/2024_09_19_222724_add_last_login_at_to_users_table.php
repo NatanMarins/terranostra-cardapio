@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('foto_perfil')->nullable(); // Campo para armazenar o caminho da foto de perfil
-            $table->string('situacao')->default('ativo');
+            $table->timestamp('last_login_at')->nullable(); // Campo para armazenar a data e hora do último login
         });
     }
 
@@ -23,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('foto_perfil');
-            $table->dropColumn('situacao');
+            $table->dropColumn('last_login_at');
         });
     }
 };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Empresa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,11 @@ class ProfileController extends Controller
         // Recuperar do banco de dados as informações do usuário logado
         $usuario = User::where('id', Auth::id())->first();
 
+        $empresaId = Auth::user()->empresa_id;
+        $empresa = Empresa::where('id', $empresaId)->get()->first();
+
         // Carrega a view
-        return view('profile.show', ['user' => $usuario]);
+        return view('profile.show', compact('empresa'), ['user' => $usuario]);
         
     }
 
