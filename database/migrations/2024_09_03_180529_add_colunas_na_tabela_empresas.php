@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('empresas', function(Blueprint $table) {
             $table->string('razao_social');
             $table->string('cnpj');
-            $table->string('situacao')->default('ativo');
+            $table->boolean('situacao')->default(1);
             $table->string('telefone');
             $table->string('email');
             $table->string('cep');

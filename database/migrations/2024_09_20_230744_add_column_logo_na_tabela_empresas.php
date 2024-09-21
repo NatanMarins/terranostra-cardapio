@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('foto_perfil')->nullable(); // Campo para armazenar o caminho da foto de perfil
-            $table->boolean('situacao')->default(1);
+        Schema::table('empresas', function (Blueprint $table) {
+            $table->string('logo')->nullable(); // Campo para armazenar o caminho da logo
         });
     }
 
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('foto_perfil');
-            $table->dropColumn('situacao');
+        Schema::table('empresas', function (Blueprint $table) {
+            $table->dropColumn('logo');
         });
     }
 };

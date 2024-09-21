@@ -3,7 +3,6 @@
 @section('content')
     <x-alert />
 
-
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4">
@@ -11,22 +10,8 @@
                 <div class="card">
                     <div class="card-body text-center">
 
-                        <img src="{{ $user->foto_perfil ? asset('storage/' . $user->foto_perfil) : asset('images/default-avatar.png') }}"
-                            alt="Foto de perfil" width="150" height="150" class="rounded-circle img-fluid">
-
-
-                        <h4 class="mt-3">{{ Auth::user()->name }}</h4>
-
-                        @if (Auth::user()->situacao === 'ativo')
-                            <p class="text-primary">{{ Auth::user()->situacao }}</p>
-                        @else
-                            <p class="text-danger">{{ Auth::user()->situacao }}</p>
-                            
-                        @endif
-
-
                         <!-- Último Acesso -->
-                        <p class="text-muted">
+                        <p class="small">
                             Último Acesso:
                             @if (Auth::user()->last_login_at)
                                 {{ Auth::user()->last_login_at }}
@@ -35,11 +20,26 @@
                             @endif
                         </p>
 
+                        <img src="{{ $user->foto_perfil ? asset('storage/' . $user->foto_perfil) : asset('images/default-avatar.png') }}"
+                            alt="Foto de perfil" width="150" height="150" class="rounded-circle img-fluid">
+
+
+                        <h4 class="mt-3">{{ Auth::user()->name }}</h4>
+
+                        <p>{{ $empresa->nome }}</p>
+
+                        @if (Auth::user()->situacao === 1)
+                            <p class="text-primary"><i class="fa-solid fa-circle"></i> Ativo</p>
+                        @else
+                            <p class="text-danger"><i class="fa-solid fa-circle" style="color: #ff0000;"></i> Desativado</p>
+                        @endif
+
                         <!-- Botão para alterar a foto de perfil -->
-                        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
-                            data-bs-target="#editProfileModal">
-                            Alterar Foto de Perfil
-                        </button>
+                        <a href="{{ route('profile.edit-foto') }}">
+                            <button type="button" class="btn btn-primary mt-3">
+                                Alterar Foto de Perfil
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -63,11 +63,22 @@
                                     readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="role" class="form-label">Papel</label>
+                                <label for="role" class="form-label">Nível de Usuário</label>
                                 <input type="text" class="form-control" id="role"
                                     value="{{ ucfirst(Auth::user()->role) }}" readonly>
                             </div>
                         </form>
+                        <div class="mb-3">
+                            <a href="{{ route('profile.edit') }}">
+                                <button class="btn btn-info">Editar Perfil</button>
+                            </a>
+                            <a href="{{ route('empresa_profile.show') }}">
+                                <button class="btn btn-info">Perfil {{ $empresa->nome }}</button>
+                            </a>
+                            <a href="{{ route('profile.edit-password') }}">
+                                <button class="btn btn-danger">Alterar Senha</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

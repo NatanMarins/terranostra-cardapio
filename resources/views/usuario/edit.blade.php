@@ -4,6 +4,8 @@
 
     <h1>Editar Usuário</h1>
 
+    
+
     <x-alert />
 
     <form action="{{ route('usuario.update', ['usuario' => $usuario->id]) }}" method="POST">
@@ -29,7 +31,6 @@
                             {{ $role }}</option>
                     @endif
                 @endif
-            @empty
             @endforelse
         </select>
 

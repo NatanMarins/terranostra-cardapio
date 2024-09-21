@@ -8,11 +8,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class ProfileController extends Controller
 {
 
-    public function show(){
+    public function show()
+    {
 
         // Recuperar do banco de dados as informações do usuário logado
         $usuario = User::where('id', Auth::id())->first();
@@ -22,39 +24,53 @@ class ProfileController extends Controller
 
         // Carrega a view
         return view('profile.show', compact('empresa'), ['user' => $usuario]);
-        
     }
 
 
     public function edit(){
 
-        // Recuperar do banco de dados as informações do usuário logado
-        $usuario = User::where('id', Auth::id())->first();
+        $user = User::where('id', Auth::id())->first();
 
         // Carrega a view
-        return view('profile.edit', ['user' => $usuario]);
-        
+        return view('profile.edit', ['user' => $user]);
     }
 
 
-    public function update(){
+    public function update(Request $request, User $usuario) {
+
+        $usuario = User::where('id', Auth::id())->first();
         
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+        ]);
+
+        // Atualiza os dados do usuário
+        $usuario->name = $validatedData['name'];
+        $usuario->email = $validatedData['email'];
+        
+        // Atualizar checkbox
+        $usuario->situacao = $request->has('situacao');
+        $usuario->save();
+
+        return redirect()->route('profile.show', ['user' => $usuario])->with('success', 'Perfil editado com sucesso!');
     }
 
 
-    public function editFoto(){
+    public function editFoto()
+    {
 
         // Recuperar do banco de dados as informações do usuário logado
         $usuario = User::where('id', Auth::id())->first();
 
         // Carrega a view
         return view('profile.edit-foto', ['user' => $usuario]);
-
     }
 
 
-    public function updateFoto(Request $request){
-        
+    public function updateFoto(Request $request)
+    {
+
         $usuario = Auth::user();
 
         // Validar o upload
@@ -76,12 +92,13 @@ class ProfileController extends Controller
             // Atualizar o caminho da foto de perfil no banco de dados
             $usuario->foto_perfil = $path;
             $usuario->save();
-
-            //dd($user);
-
         }
 
-        return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
+        return redirect()->route('profile.show')->with('success', 'Foto de perfil atualizada com sucesso!');
+    }
+
+
+    public function editPassword(){
 
     }
 }
