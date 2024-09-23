@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('bairro');
             $table->string('cidade');
             $table->string('estado');
-            $table->text('complemento');
+            $table->text('complemento')->nullable();
         });
     }
 

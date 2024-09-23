@@ -48,6 +48,9 @@ Route::group(['middleware' => ['auth', 'empresa']], function () {
     Route::get('/show-profile-empresa', [EmpresaPerfilController::class, 'show'])->name('empresa_profile.show');
     Route::get('/edit-profile-empresa', [EmpresaPerfilController::class, 'edit'])->name('empresa_profile.edit');
     Route::put('/update-profile-empresa', [EmpresaPerfilController::class, 'update'])->name('empresa_profile.update');
+    Route::get('/edit-profile-logo', [EmpresaPerfilController::class, 'editLogo'])->name('empresa_profile.edit-logo');
+    Route::put('/update-profile-logo', [EmpresaPerfilController::class, 'updateLogo'])->name('empresa_profile.update-logo');
+    Route::get('/show-colaboradores-empresa', [EmpresaPerfilController::class, 'colaboradores'])->name('empresa_profile.colaboradores');
 
 
     // Usuário

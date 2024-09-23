@@ -29,8 +29,13 @@
             <div class="sidebar-logo">
                 <div class="logo-header" data-background-color="dark">
                     <a href="index.html" class="logo">
-                        <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
-                            height="20" />
+                        <!-- Verifique se o usuário está autenticado e exiba a imagem de perfil -->
+                        @if (Auth::check())
+                            <div class="logo_img">
+                                <img src="{{ auth()->user()->empresa->logo ? asset('storage/' . auth()->user()->empresa->logo) : asset('images/default-logo.png') }}"
+                                    alt="Logo" width="70" height="70">
+                            </div>
+                        @endif
                     </a>
                     <div class="nav-toggle">
                         <button class="btn btn-toggle toggle-sidebar">

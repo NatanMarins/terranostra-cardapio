@@ -27,7 +27,8 @@ class Empresa extends Model
         'bairro',
         'cidade',
         'estado',
-        'complemento'
+        'complemento',
+        'logo'
     ];
 
 
