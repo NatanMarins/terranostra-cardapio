@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
             ]);
 
             // Atribuindo papel para usuário
-            $superAdmin->assignRole('Representante Admin');
+            $admin->assignRole('Admin');
         }
 
         if (!User::where('email', 'benjamin@teste.com.br')->first()) {
@@ -71,7 +71,7 @@ class UserSeeder extends Seeder
             ]);
 
             // Atribuindo papel para usuário
-            $admin->assignRole('Representante Admin');
+            $admin->assignRole('Admin');
         }
 
         if (!User::where('email', 'gamora@teste.com.br')->first()) {

@@ -7,13 +7,16 @@ use App\Http\Requests\UsuarioRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
     public function index(){
 
-        $usuarios = User::get();
+        $empresaId = Auth::user()->empresa_id;
+
+        $usuarios = User::where('empresa_id', $empresaId)->get();
 
         return view('usuario.index', compact('usuarios'));
     }

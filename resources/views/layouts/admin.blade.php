@@ -117,7 +117,6 @@
                                 <p>Categorias</p>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a href="{{ route('empresa.index') }}">
                                 <i class="fas fa-desktop"></i>

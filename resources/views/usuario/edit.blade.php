@@ -1,10 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <h1>Editar Usuário</h1>
 
-    
 
     <x-alert />
 
@@ -31,6 +29,8 @@
                             {{ $role }}</option>
                     @endif
                 @endif
+            @empty
+                <option value="">Nenhum papel disponível</option>
             @endforelse
         </select>
 
@@ -38,5 +38,4 @@
         <button type="reset" class="btn btn-danger">Cancel</button>
 
     </form>
-
 @endsection

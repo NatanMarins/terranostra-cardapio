@@ -14,8 +14,38 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         if (!Role::where('name', 'Super Admin')->first()) {
-            Role::create([
+            $superadmin = Role::create([
                 'name' => 'Super Admin',
+            ]);
+
+            $superadmin->givePermissionTo([
+                // Permissões menu
+                'index-cardapio',
+                'show-cardapio',
+                'create-cardapio',
+                'edit-cardapio',
+                'destroy-cardapio',
+
+                // Permissões categoria
+                'index-categoria',
+                'show-categoria',
+                'create-categoria',
+                'edit-categoria',
+                'destroy-categoria',
+
+                // Permissões empresa
+                'index-empresa',
+                'show-empresa',
+                'create-empresa',
+                'edit-empresa',
+                'destroy-empresa',
+
+                // Permissões usuario
+                'index-usuario',
+                'show-usuario',
+                'create-usuario',
+                'edit-usuario',
+                'destroy-usuario',
             ]);
         }
 

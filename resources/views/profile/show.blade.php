@@ -63,9 +63,15 @@
                                     readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="role" class="form-label">Nível de Usuário</label>
-                                <input type="text" class="form-control" id="role"
-                                    value="{{ ucfirst(Auth::user()->role) }}" readonly>
+                                @forelse ($user->getRoleNames() as $role)
+                                    <label for="role" class="form-label">Nível de Usuário</label>
+                                    <input type="text" class="form-control" id="role" value="{{ $role }}"
+                                        readonly>
+                                @empty
+                                    <label for="role" class="form-label">Nível de Usuário</label>
+                                    <input type="text" class="form-control" id="role" value="{{ '-' }}"
+                                        readonly>
+                                @endforelse
                             </div>
                         </form>
                         <div class="mb-3">

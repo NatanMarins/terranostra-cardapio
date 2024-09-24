@@ -17,12 +17,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -36,7 +30,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
-
                             @if ($colaboradores->isEmpty())
                                 <p>Nenhum Colaborador encontrado!</p>
                             @endif
@@ -77,10 +70,8 @@
                                                         </a>
                                                     @endcan
                                                 </td>
-
                                             </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
