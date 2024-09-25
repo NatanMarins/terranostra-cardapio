@@ -41,6 +41,10 @@ class PermissionSeeder extends Seeder
             'create-usuario',
             'edit-usuario',
             'destroy-usuario',
+
+            // Permissões Perfil Empresa
+            'edit-profile-empresa',
+            'edit-profile-logo',
         ];
 
         foreach($permissions as $permission){

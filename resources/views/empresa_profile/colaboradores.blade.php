@@ -22,10 +22,10 @@
             <div class="card">
 
                 <!-- se precisar de topo no card
-                                    <div class="card-header">
-                                    <div class="card-title">Listar Produtos</div>
-                                    </div>
-                                se precisar de topo no card -->
+                                        <div class="card-header">
+                                        <div class="card-title">Listar Produtos</div>
+                                        </div>
+                                    se precisar de topo no card -->
 
                 <div class="card-body">
                     <div class="row">
@@ -62,9 +62,15 @@
                                                 </td>
                                                 <td>{{ $colaborador->name }}</td>
                                                 <td>{{ $colaborador->email }}</td>
-                                                <td></td>
                                                 <td>
-                                                    @can('usuario.show')
+                                                    @forelse ($colaborador->getRoleNames() as $role)
+                                                        {{ $role }}
+                                                    @empty
+                                                        {{ '-' }}
+                                                    @endforelse
+                                                </td>
+                                                <td>
+                                                    @can('show-usuario')
                                                         <a href="{{ route('usuario.show', ['usuario' => $colaborador->id]) }}">
                                                             <button class="btn btn-primary">Ver</button>
                                                         </a>

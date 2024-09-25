@@ -26,12 +26,14 @@
                             <p class="text-danger"><i class="fa-solid fa-circle" style="color: #ff0000;"></i> Desativado</p>
                         @endif
 
-                        <!-- Botão para alterar a foto de perfil -->
-                        <a href="{{ route('empresa_profile.edit-logo') }}">
-                            <button type="button" class="btn btn-primary mt-3">
-                                Alterar Logo
-                            </button>
-                        </a>
+                        @can('edit-profile-logo')
+                            <!-- Botão para alterar a foto de perfil -->
+                            <a href="{{ route('empresa_profile.edit-logo') }}">
+                                <button type="button" class="btn btn-primary mt-3">
+                                    Alterar Logo
+                                </button>
+                            </a>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -117,9 +119,11 @@
                             </div>
                         </form>
                         <div class="mb-3">
-                            <a href="{{ route('empresa_profile.edit') }}">
-                                <button class="btn btn-info">Editar Perfil</button>
-                            </a>
+                            @can('edit-profile-empresa')
+                                <a href="{{ route('empresa_profile.edit') }}">
+                                    <button class="btn btn-info">Editar Perfil</button>
+                                </a>
+                            @endcan
                             <a href="{{ route('empresa_profile.colaboradores') }}">
                                 <button class="btn btn-info">Colaboradores</button>
                             </a>

@@ -74,6 +74,9 @@ class RoleSeeder extends Seeder
                 'create-usuario',
                 'edit-usuario',
                 'destroy-usuario',
+
+                'edit-profile-empresa',
+                'edit-profile-logo',
             ]);
         }
 

@@ -104,33 +104,33 @@
 
                         <li class="nav-item">
                             <a href="{{ route('menu.index') }}">
-                                <i class="fas fa-desktop"></i>
-                                <p>Cardápio</p>
+                                <i class="fa-solid fa-book"></i>
+                                <p> Cardápio</p>
                             </a>
                         </li>
-
-
-
                         <li class="nav-item">
                             <a href="{{ route('categoria.index') }}">
-                                <i class="fas fa-desktop"></i>
-                                <p>Categorias</p>
+                                <i class="fa-solid fa-layer-group"></i>
+                                <p> Categorias</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('empresa.index') }}">
-                                <i class="fas fa-desktop"></i>
-                                <p>Empresas</p>
-                            </a>
-                        </li>
+                        @can('index-empresa')
+                            <li class="nav-item">
+                                <a href="{{ route('empresa.index') }}">
+                                    <i class="fa-solid fa-store"></i>
+                                    <p>Empresas</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('index-usuario')
+                            <li class="nav-item">
+                                <a href={{ route('usuario.index') }}>
+                                    <i class="fa-solid fa-users"></i>
+                                    <p> Colaboradores</p>
+                                </a>
+                            </li>
+                        @endcan
                         <!--
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Catálogo Online</p>
-                            </a>
-                        </li>
-
                         <li class="nav-item">
                             <a href="widgets.html">
                                 <i class="fas fa-desktop"></i>
@@ -342,10 +342,13 @@
                                     <div class="dropdown-user-scroll scrollbar-outer">
                                         <li>
                                             <div class="user-box">
-                                                <div class="avatar-lg">
-                                                    <img src="assets/img/profile.jpg" alt="image profile"
-                                                        class="avatar-img rounded" />
-                                                </div>
+                                                @if (Auth::check())
+                                                    <div class="avatar-lg">
+                                                        <img src="{{ Auth::user()->foto_perfil ? asset('storage/' . Auth::user()->foto_perfil) : asset('images/default-avatar.png') }}"
+                                                            alt="Foto de perfil" class="avatar-img rounded">
+                                                    </div>
+                                                @endif
+
                                                 <div class="u-text">
                                                     <h4>
                                                         @if (auth()->check())
@@ -357,18 +360,16 @@
                                                             {{ auth()->user()->email }}
                                                         @endif
                                                     </p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Ver
+                                                    <a href="{{ route('profile.show') }}"
+                                                        class="btn btn-xs btn-secondary btn-sm">Ver
                                                         Perfil</a>
                                                 </div>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="{{ route('profile.show') }}"><i
-                                                    class="fa-solid fa-user"></i> Meu Perfil</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="{{ route('profile.edit') }}"><i
-                                                    class="fa-solid fa-gear"></i> Configurações</a>
+                                            <a class="dropdown-item" href="{{ route('empresa_profile.show') }}"><i
+                                                    class="fa-solid fa-store"></i> Perfil Empresa</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="{{ route('login.destroy') }}"><i
                                                     class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
