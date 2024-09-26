@@ -2,8 +2,6 @@
 
 @section('content')
 
-    <x-alert />
-
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
         <div>
             <h3 class="fw-bold mb-3">colaboradores</h3>
@@ -13,7 +11,7 @@
             <div class="btn-group" role="group" aria-label="Basic example">
 
                 @can('create-usuario')
-                    <a href="{{ route('usuario.create') }}" class="btn btn-primary" title="Cadastrar Colaborador">
+                    <a href="{{ route('empresa.create-colaborador', ['empresa' => $empresa->id]) }}" class="btn btn-primary" title="Cadastrar Colaborador">
                         <i class="fa-solid fa-plus"></i>
                     </a>
                 @endcan
@@ -22,8 +20,10 @@
         <!-- botao -->
     </div>
 
-    @if ($usuarios->isEmpty())
-        <p>Nenhum produto encontrado!</p>
+    <x-alert />
+
+    @if ($colaboradores->isEmpty())
+        <p>Nenhum Colaborador encontrado!</p>
     @else
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover mt-3">
@@ -36,36 +36,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($usuarios as $usuario)
+                    @foreach ($colaboradores as $colaborador)
                         <tr>
                             <td>
-                                @if ($usuario->foto_perfil)
+                                @if ($colaborador->foto_perfil)
                                     <div class="usuario-image">
-                                        <img src="{{ asset('storage/' . $usuario->foto_perfil) }}"
-                                            alt="Imagem Perfil do Usuário" class="rounded-circle"
-                                            style="max-width: 50px;">
+                                        <img src="{{ asset('storage/' . $colaborador->foto_perfil) }}"
+                                            alt="Imagem Perfil do Usuário" class="rounded-circle" style="max-width: 50px;">
                                     </div>
                                 @else
                                     <div class="usuario-image">
-                                        <img src="{{ asset('images/default-avatar.png') }}"
-                                            alt="Imagem Perfil do Usuário" class="rounded-circle"
-                                            style="max-width: 50px;">
+                                        <img src="{{ asset('images/default-avatar.png') }}" alt="Imagem Perfil do Usuário"
+                                            class="rounded-circle" style="max-width: 50px;">
                                     </div>
                                 @endif
                             </td>
-                            <td>{{ $usuario->name }}</td>
-                            <td>{{ $usuario->email }}</td>
+                            <td>{{ $colaborador->name }}</td>
+                            <td>{{ $colaborador->email }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('usuario.show', ['usuario' => $usuario->id]) }}"
+                                    <a href="{{ route('usuario.show', ['usuario' => $colaborador->id]) }}"
                                         class="btn btn-primary" title="Visualizar Usuário"> <i
                                             class="fa-regular fa-eye"></i>
                                     </a>
                                 </div>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('usuario.edit', ['usuario' => $usuario->id]) }}"
-                                        class="btn btn-info" title="Editar Usuário"> <i
-                                            class="fa-solid fa-edit"></i>
+                                    <a href="{{ route('usuario.edit', ['usuario' => $colaborador->id]) }}"
+                                        class="btn btn-info" title="Editar Usuário"> <i class="fa-solid fa-edit"></i>
                                     </a>
                                 </div>
                             </td>
@@ -75,10 +72,4 @@
             </table>
         </div>
     @endif
-
-
-
-
-
-
 @endsection

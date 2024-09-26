@@ -34,6 +34,7 @@ class PermissionSeeder extends Seeder
             'create-empresa',
             'edit-empresa',
             'destroy-empresa',
+            'colaboradores',
 
             // Permissões usuario
             'index-usuario',

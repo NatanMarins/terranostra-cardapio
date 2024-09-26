@@ -94,4 +94,49 @@ class EmpresaController extends Controller
             return redirect()->route('empresa.index')->with('error', ' A Empresa não pode ser excluida!');
         }
     }
+
+
+    public function colaboradores(Empresa $empresa) {
+
+        // Busca todos os colaboradores (usuários) da empresa
+        $colaboradores = User::where('empresa_id', $empresa->id)->get();
+
+        // Retorna a view com a lista de colaboradores
+        return view('empresa.colaboradores', compact('colaboradores', 'empresa'));
+    }
+
+
+    public function createColaborador(Empresa $empresa) {
+
+        // Busca todos os colaboradores (usuários) da empresa
+        $colaboradores = User::where('empresa_id', $empresa->id)->get();
+
+        $roles = Role::pluck('name')->all();
+
+        return view('empresa.create-colaborador', ['empresa' => $empresa, 'colaborador' => $colaboradores, 'roles' => $roles]);
+    }
+
+
+    public function storeColaborador(Request $request, Empresa $empresa) {
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'roles' => 'required',
+        ]);
+
+        $usuario = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => $validated['password'],
+            'empresa_id' => $empresa->id,
+        ]);
+
+        // Cadastrar papel para o usuário
+        $usuario->assignRole($request->roles);
+
+        return redirect()->route('empresa.colaboradores', ['empresa' => $empresa->id])->with('success', 'Cadastrado com sucesso!');
+    }
+
 }

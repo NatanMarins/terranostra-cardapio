@@ -2,13 +2,19 @@
 
 @section('content')
     <x-alert />
-    
-    <h1>Alterar Senha</h1>
+    <div class="container mt-5">
+        <h2>Editar Senha</h2>
+        <form action="{{ route('profile.update-password', $user->id) }}" method="POST">
+            @csrf
+            @method('PUT')
 
-    <form action="{{ route('profile.update-foto') }}" method="POST">
-        @csrf
-        @method('PUT')
-
-        <button type="submit" class="btn btn-primary">Confirmar Alteração</button>
-    </form>
+            <!-- Nome do Usuário -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <!-- Botão para Salvar -->
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        </form>
+    </div>
 @endsection

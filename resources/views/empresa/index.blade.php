@@ -54,7 +54,7 @@
                                                     <td>{{ $empresa->nome }}</td>
                                                     <td>{{ $empresa->email }}</td>
                                                     <td>
-                                                        <a href="{{ route('usuario.index', ['empresa' => $empresa->id]) }}"
+                                                        <a href="{{ route('empresa.colaboradores', $empresa->id) }}"
                                                             title="Editar">
                                                             <button class="btn btn-info"><i
                                                                     class="fa-solid fa-users"></i></button>

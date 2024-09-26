@@ -27,13 +27,6 @@
                 @enderror
             </div>
 
-            <!-- Situação (Ativo/Inativo) -->
-            <div class="form-check form-switch mb-3">
-                <input class="form-check-input" type="checkbox" id="situacao" name="situacao"
-                    {{ $user->situacao ? 'checked' : '' }}>
-                <label class="form-check-label" for="situacao">Usuário Ativo</label>
-            </div>
-
             <!-- Botão para Salvar -->
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
         </form>

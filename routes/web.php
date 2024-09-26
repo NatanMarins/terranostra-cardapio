@@ -73,7 +73,9 @@ Route::group(['middleware' => ['auth', 'empresa']], function () {
     Route::get('/edit-empresa/{empresa}', [EmpresaController::class, 'edit'])->name('empresa.edit')->middleware('permission:index-empresa');
     Route::put('/update-empresa/{empresa}', [EmpresaController::class, 'update'])->name('empresa.update')->middleware('permission:index-empresa');
     Route::delete('/destroy-empresa/{empresa}', [EmpresaController::class, 'destroy'])->name('empresa.destroy')->middleware('permission:index-empresa');
-
+    Route::get('/colaboradores/{empresa}', [EmpresaController::class, 'colaboradores'])->name('empresa.colaboradores')->middleware('permission:colaboradores');
+    Route::get('/create-colaborador/{empresa}', [EmpresaController::class, 'createColaborador'])->name('empresa.create-colaborador')->middleware('permission:index-empresa');
+    Route::post('/store-colaborador/{empresa}', [EmpresaController::class, 'storeColaborador'])->name('empresa.store-colaborador')->middleware('permission:index-empresa');
 
 
     // Cardápio

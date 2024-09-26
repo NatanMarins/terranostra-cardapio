@@ -49,12 +49,13 @@ class UsuarioController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'],
+            'empresa_id' => $request->empresa_id,
         ]);
 
         // Cadastrar papel para o usuário
         $usuario->assignRole($request->roles);
 
-        return redirect()->route('usuario.create')->with('success', 'Cadastrado com sucesso!');
+        return redirect()->route('usuario.index')->with('success', 'Cadastrado com sucesso!');
     }
 
 
@@ -70,10 +71,18 @@ class UsuarioController extends Controller
 
     public function update(Request $request, User $usuario){
 
-        $usuario->update([
-            'nome' => $request->nome,
-            'email' => $request->email,
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
         ]);
+
+        // Atualiza os dados do usuário
+        $usuario->name = $validatedData['name'];
+        $usuario->email = $validatedData['email'];
+        
+        // Atualizar checkbox
+        $usuario->situacao = $request->has('situacao');
+        $usuario->save();
 
         $usuario->syncRoles($request->roles);
 
