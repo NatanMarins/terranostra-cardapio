@@ -10,15 +10,13 @@ use Illuminate\Support\Facades\Password;
 
 class ForgotPasswordController extends Controller
 {
-    public function showForgotPassword()
-    {
+    public function showForgotPassword(){
 
         return view('login.forgotPassword');
     }
 
 
-    public function submitForgotPassword(Request $request)
-    {
+    public function submitForgotPassword(Request $request){
 
         // Validar formulário
         $request->validate([

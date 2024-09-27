@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class EmpresaPerfilController extends Controller
 {
-    public function show()
-    {
+    public function show(){
 
         // Recuperar do banco de dados as informações do usuário logado
         $empresaId = Auth::user()->empresa_id;
@@ -25,8 +24,7 @@ class EmpresaPerfilController extends Controller
     }
 
 
-    public function edit()
-    {
+    public function edit(){
 
         $empresaId = Auth::user()->empresa_id;
         $empresa = Empresa::where('id', $empresaId)->get()->first();
@@ -35,8 +33,7 @@ class EmpresaPerfilController extends Controller
     }
 
 
-    public function update(Request $request, Empresa $empresa)
-    {
+    public function update(Request $request, Empresa $empresa){
 
         $empresaId = Auth::user()->empresa_id;
         $empresa = Empresa::where('id', $empresaId)->get()->first();
@@ -44,9 +41,9 @@ class EmpresaPerfilController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'razao_social' => 'required',
-            'cnpj' => 'required',
-            'email' => 'required|email',
+            'cnpj' => 'required|cnpj',
             'telefone' => 'required',
+            'email' => 'required|email|unique:empresas',
             'cep' => 'required',
             'estado' => 'required',
             'cidade' => 'required',
@@ -54,6 +51,22 @@ class EmpresaPerfilController extends Controller
             'rua' => 'required',
             'numero_endereco' => 'required',
             'complemento' => 'nullable'
+        ],[
+            // Mensagens de erro
+            'nome.required' => 'O campo Nome é obrigatório.',
+            'razao_social.required' => 'O campo Razão Social é obrigatório.',
+            'cnpj.required' => 'O campo CNPJ é obrigatório.',
+            'cnpj.cnpj' => 'Cnpj inválido.',
+            'telefone.required' => 'O campo Telefone é obrigatório.',
+            'email.required' => 'O campo E-mail é obrigatório.',
+            'email.email' => 'Cnpj inválido.',
+            'email.unique' => 'Esse E-mail já está sendo usado.',
+            'cep.required' => 'O campo CEP é obrigatório.',
+            'estado.required' => 'O campo Estado é obrigatório.',
+            'cidade.required' => 'O campo Cidade é obrigatório.',
+            'bairro.required' => 'O campo Bairro é obrigatório.',
+            'rua.required' => 'O campo Rua é obrigatório.',
+            'numero_endereco.required' => 'O campo Número é obrigatório.',
         ]);
 
         $empresa->update([
@@ -79,8 +92,7 @@ class EmpresaPerfilController extends Controller
     }
 
 
-    public function editLogo()
-    {
+    public function editLogo(){
 
         $empresaId = Auth::user()->empresa_id;
         $empresa = Empresa::where('id', $empresaId)->get()->first();
@@ -89,8 +101,7 @@ class EmpresaPerfilController extends Controller
     }
 
 
-    public function updateLogo(Request $request)
-    {
+    public function updateLogo(Request $request){
 
         $empresaId = Auth::user()->empresa_id;
         $empresa = Empresa::where('id', $empresaId)->get()->first();
@@ -128,8 +139,6 @@ class EmpresaPerfilController extends Controller
         $empresa = Empresa::where('id', $empresaId)->get()->first();
 
         $userId = Auth::user()->id;
-
-        //$colaboradores = Empresa::with('usuarios')->findOrFail($empresaId);
 
         // Recupera os usuários da empresa, ordenando o usuário logado como o primeiro
         $colaboradores = User::where('empresa_id', $empresaId)

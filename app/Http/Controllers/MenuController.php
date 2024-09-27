@@ -31,12 +31,7 @@ class MenuController extends Controller
 
         $categoria = Menu::with('categoria')->findOrFail($menu->id);
 
-        $descontoPercentual = (($categoria->preco - $categoria->preco_promocional) / $categoria->preco) * 100;
-
-        $precoPromocional = $categoria->preco - ($categoria->preco * $categoria->desconto_percentual / 100);
-
-
-        return view('menu.show', compact('categoria', 'descontoPercentual', 'precoPromocional'), ['menu' => $menu]);
+        return view('menu.show', compact('categoria'), ['menu' => $menu]);
     }
 
 
@@ -76,7 +71,7 @@ class MenuController extends Controller
             DB::commit();
 
             // Redirecionar o usuário
-            return redirect()->route('menu.create')->with('success', 'Produto cadastrado com sucesso!');
+            return redirect()->route('menu.index')->with('success', 'Produto cadastrado com sucesso!');
 
         } catch(Exception $e){
             //Operação não concluída com êxito

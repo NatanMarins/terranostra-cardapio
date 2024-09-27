@@ -458,6 +458,20 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
 
+        <!-- Incluir jQuery e jQuery Mask Plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+        <!-- Aplicar a máscara globalmente -->
+        <script>
+            $(document).ready(function() {
+                $('#cnpj').mask('00.000.000/0000-00');
+
+                // Máscara para o Telefone (com DDD)
+                $('#telefone').mask('(00) 00000-0000');
+            });
+        </script>
+
 </body>
 
 </html>

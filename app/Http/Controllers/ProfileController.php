@@ -43,6 +43,11 @@ class ProfileController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
+        ],[
+            // Mensagens de erro
+            'nome.required' => 'O campo nome é obrigatório.',
+            'email.required' => 'O campo E-mail é obrigatório.',
+            'email.email' => 'Insira um E-mail válido.',
         ]);
 
         // Atualiza os dados do usuário
@@ -55,8 +60,7 @@ class ProfileController extends Controller
     }
 
 
-    public function editFoto()
-    {
+    public function editFoto(){
 
         // Recuperar do banco de dados as informações do usuário logado
         $usuario = User::where('id', Auth::id())->first();
@@ -66,8 +70,7 @@ class ProfileController extends Controller
     }
 
 
-    public function updateFoto(Request $request)
-    {
+    public function updateFoto(Request $request){
 
         $usuario = Auth::user();
 
@@ -102,7 +105,7 @@ class ProfileController extends Controller
         $usuario = User::where('id', Auth::id())->first();
 
         // Carrega a view
-        return view('profile.edit-password', ['user' => $usuario]);
+        return view('usuario.edit-password', ['user' => $usuario]);
     }
 
     public function updatePassword(Request $request)

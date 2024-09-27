@@ -21,8 +21,6 @@ class LoginController extends Controller
 
     public function loginProcess(LoginRequest $request){
 
-        //dd($request);
-
         // Validar o formulário
         $request->validated();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuarioRequest;
+use App\Models\Empresa;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -24,7 +25,10 @@ class UsuarioController extends Controller
 
     public function show(User $usuario){
 
-        return view('usuario.show', ['usuario' => $usuario]);
+        $empresaId = Auth::user()->empresa_id;
+        $empresa = Empresa::where('id', $empresaId)->get()->first();
+
+        return view('usuario.show', compact('empresa'), ['user' => $usuario]);
     }
 
 
@@ -92,11 +96,33 @@ class UsuarioController extends Controller
 
     public function editPassword(){
 
+        // Recuperar do banco de dados as informações do usuário logado
+        $usuario = User::where('id', Auth::id())->first();
+
+        // Carrega a view
+        return view('profile.edit-password', ['user' => $usuario]);
     }
 
 
-    public function updatePassword(){
+    public function updatePassword(Request $request)
+    {
+        // Recuperar do banco de dados as informações do usuário logado
+        $usuario = User::where('id', Auth::id())->first();
 
+        // Validar o upload
+        $request->validate([
+            'password' => 'required|min:6',
+        ],[
+            'password.required' => 'Campo senha é obrigatório!',
+            'password.min' => 'A senha deve conter no mínimo :min caracteres.'
+        ]);
+
+        // Editar as informações no banco de dados
+        $usuario->update([
+            'password' => $request->password,
+        ]);
+
+        return redirect()->route('usuario.show', ['usuario' => $request->usuario])->with('success', 'Senha atualizada com sucesso!');
     }
 
 
