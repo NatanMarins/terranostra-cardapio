@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-
     <link href="{{ asset('css//bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/plugins.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/kaiadmin.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/demo.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/demo.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
-
     <title>Terra Nostra</title>
     </style>
 </head>
@@ -28,12 +24,12 @@
             <!-- Logo Header -->
             <div class="sidebar-logo">
                 <div class="logo-header" data-background-color="dark">
-                    <a href="index.html" class="logo">
+                    <a href="#" class="logo">
                         <!-- Verifique se o usuário está autenticado e exiba a imagem de perfil -->
                         @if (Auth::check())
                             <div class="logo_img">
                                 <img src="{{ auth()->user()->empresa->logo ? asset('storage/' . auth()->user()->empresa->logo) : asset('images/default-logo.png') }}"
-                                    alt="Logo" width="70" height="70">
+                                    alt="Logo" width="150px" height="70px">
                             </div>
                         @endif
                     </a>
@@ -105,38 +101,31 @@
                         <li class="nav-item">
                             <a href="{{ route('menu.index') }}">
                                 <i class="fa-solid fa-book"></i>
-                                <p> Cardápio</p>
+                                &nbsp &nbsp Cardápio
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('categoria.index') }}">
                                 <i class="fa-solid fa-layer-group"></i>
-                                <p> Categorias</p>
+                                &nbsp &nbsp Categorias
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('pedido.index') }}">
-                                <i class="fa-solid fa-layer-group"></i>
-                                <p>Pedidos</p>
-                            </a>
-                        </li>
-                        @can('index-usuario')
-                            <li class="nav-item">
-                                <a href={{ route('usuario.index') }}>
-                                    <i class="fa-solid fa-users"></i>
-                                    <p> Colaboradores</p>
-                                </a>
-                            </li>
-                        @endcan
                         @can('index-empresa')
                             <li class="nav-item">
                                 <a href="{{ route('empresa.index') }}">
                                     <i class="fa-solid fa-store"></i>
-                                    <p>Empresas</p>
+                                    &nbsp &nbsp Empresas
                                 </a>
                             </li>
                         @endcan
-                        
+                        @can('index-usuario')
+                            <li class="nav-item">
+                                <a href={{ route('usuario.index') }}>
+                                    <i class="fa-solid fa-users"></i>
+                                    &nbsp &nbsp Colaboradores
+                                </a>
+                            </li>
+                        @endcan
                         <!--
                         <li class="nav-item">
                             <a href="widgets.html">
