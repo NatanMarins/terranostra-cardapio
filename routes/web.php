@@ -7,6 +7,7 @@ use App\Http\Controllers\EmpresaPerfilController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
@@ -96,6 +97,14 @@ Route::group(['middleware' => ['auth', 'empresa']], function () {
     Route::get('/edit-categoria/{categoria}', [CategoriaController::class, 'edit'])->name('categoria.edit')->middleware('permission:edit-categoria');
     Route::put('/update-categoria/{categoria}', [CategoriaController::class, 'update'])->name('categoria.update')->middleware('permission:edit-categoria');
     Route::delete('/destroy-categoria/{categoria}', [CategoriaController::class, 'destroy'])->name('categoria.destroy')->middleware('permission:destroy-categoria');
+
+
+    // Pedidos
+    Route::get('/index-pedido', [PedidoController::class, 'index'])->name('pedido.index');
+    Route::get('/show-pedido/{pedido}', [PedidoController::class, 'show'])->name('pedido.show')->middleware('permission:show-pedido');
+    Route::get('/create-pedido', [PedidoController::class, 'create'])->name('pedido.create')->middleware('permission:create-pedido');
+    Route::post('/store-pedido', [PedidoController::class, 'store'])->name('pedido.store')->middleware('permission:create-pedido');
+    Route::delete('/destroy-pedido/{pedido}', [PedidoController::class, 'destroy'])->name('pedido.destroy')->middleware('permission:destroy-pedido');
 
 
     // Papéis

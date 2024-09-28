@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('menu', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo');
             $table->string('nome');
             $table->string('descricao');
             $table->float('preco');

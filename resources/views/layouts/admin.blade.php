@@ -114,14 +114,12 @@
                                 <p> Categorias</p>
                             </a>
                         </li>
-                        @can('index-empresa')
-                            <li class="nav-item">
-                                <a href="{{ route('empresa.index') }}">
-                                    <i class="fa-solid fa-store"></i>
-                                    <p>Empresas</p>
-                                </a>
-                            </li>
-                        @endcan
+                        <li class="nav-item">
+                            <a href="{{ route('pedido.index') }}">
+                                <i class="fa-solid fa-layer-group"></i>
+                                <p>Pedidos</p>
+                            </a>
+                        </li>
                         @can('index-usuario')
                             <li class="nav-item">
                                 <a href={{ route('usuario.index') }}>
@@ -130,6 +128,15 @@
                                 </a>
                             </li>
                         @endcan
+                        @can('index-empresa')
+                            <li class="nav-item">
+                                <a href="{{ route('empresa.index') }}">
+                                    <i class="fa-solid fa-store"></i>
+                                    <p>Empresas</p>
+                                </a>
+                            </li>
+                        @endcan
+                        
                         <!--
                         <li class="nav-item">
                             <a href="widgets.html">

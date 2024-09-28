@@ -29,4 +29,12 @@ class Menu extends Model
     {
         return $this->belongsTo(Empresa::class);
     }
+
+    // Relacionamento com pedidos
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class, 'pedido_menu')
+                    ->withPivot('quantidade', 'observacoes', 'preco_total')
+                    ->withTimestamps();
+    }
 }

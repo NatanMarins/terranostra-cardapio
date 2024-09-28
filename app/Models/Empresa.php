@@ -31,19 +31,27 @@ class Empresa extends Model
         'logo'
     ];
 
-
+    // Relacionamento com categorias
     public function categorias()
     {
         return $this->hasMany(Categoria::class);
     }
 
+    // Relacionamento com menu
     public function menus()
     {
         return $this->hasMany(Menu::class);
     }
 
+    // Relacionamento com usuarios
     public function usuarios()
     {
         return $this->hasMany(User::class);
+    }
+
+    // Relacionamento com pedidos
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class);
     }
 }
