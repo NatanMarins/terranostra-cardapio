@@ -31,11 +31,13 @@
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
                             @if ($colaboradores->isEmpty())
-                                <p>Nenhum Colaborador encontrado!</p>
+                                <div class="alert alert-warning" role="alert">
+                                    <p>Nenhum usuário encontrado!</p>
+                                </div>
                             @endif
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover mt-3">
-                                    <thead>
+                                    <thead class="thead-dark">
                                         <th scope="col">Foto</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">Email</th>
@@ -45,7 +47,7 @@
                                     <tbody>
                                         @foreach ($colaboradores as $colaborador)
                                             <tr>
-                                                <td>
+                                                <td style="width:200px" class="text-center">
                                                     @if ($colaborador->foto_perfil)
                                                         <div class="colaborador-image">
                                                             <img src="{{ asset('storage/' . $colaborador->foto_perfil) }}"
@@ -69,7 +71,7 @@
                                                         {{ '-' }}
                                                     @endforelse
                                                 </td>
-                                                <td>
+                                                <td style="width:200px" class="text-center">
                                                     @can('show-usuario')
                                                         <a href="{{ route('usuario.show', ['usuario' => $colaborador->id]) }}">
                                                             <button class="btn btn-primary">Ver</button>

@@ -4,18 +4,12 @@
     <!-- Cabeçalho -->
     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
         <div>
-            <h3 class="fw-bold mb-3">Cadastro</h3>
-            <ul class="breadcrumbs mb-3">
-                <li class="nav-home"><a href="#"> <i class="fa fa-home"></i> </a> </li>
-                <li class="separator"> <i class="fa fa-arrow-right"></i> </li>
-                <li class="nav-item"> Cadastrar Produto </li>
-
-            </ul>
+            <h3 class="fw-bold mb-3">Cadastro de Produto</h3>
         </div>
         <!-- botao -->
         <div class="ms-md-auto py-2 py-md-0">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{{ route('menu.index') }}" class="btn btn-primary" title="Listar Produto">
+                <a href="{{ route('menu.index') }}" class="btn btn-secondary btn-sm" title="Listar Produtos">
                     <i class="fa-solid fa-list"></i>
                 </a>
             </div>
@@ -45,7 +39,7 @@
                                 @method('POST')
                                 <div class="row">
                                     <div class="form-group col-md-4">
-                                        <label>Nome</label>
+                                        <label>Nome do Produto:</label>
                                         <input type="text" name="nome" id="nome" value="{{ old('nome') }}"
                                             class="form-control">
                                     </div>
@@ -90,8 +84,8 @@
                                 </div>
 
                                 <div class="card-action">
-                                    <button type="submit" class="btn btn-success">Cadastrar</button>
-                                    <button type="reset" class="btn btn-danger">Cancel</button>
+                                    <button type="submit" class="btn btn-secondary">Cadastrar</button>
+                                    <button type="reset" class="btn btn-secondary">Cancel</button>
                                 </div>
                             </form>
 

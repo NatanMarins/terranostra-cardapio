@@ -20,14 +20,11 @@
             <div class="btn-group" role="group" aria-label="Basic example">
 
                 @can('create-cardapio')
-                    <a href="{{ route('menu.create') }}" class="btn btn-primary" title="Cadastrar Produto">
+                    <a href="{{ route('menu.create') }}" class="btn btn-secondary btn-sm" title="Cadastrar Produto">
                         <i class="fa-solid fa-plus"></i>
                     </a>
                 @endcan
 
-                <a href="{{ route('categoria.index') }}" class="btn btn-info" title="Categorias">
-                    <i class="fa-regular fa-eye"></i>
-                </a>
             </div>
         </div>
         <!-- botao -->
@@ -54,7 +51,7 @@
                             @else
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover mt-3">
-                                        <thead>
+                                        <thead class="thead-dark">
                                             <tr>
                                                 <th scope="col">Nome do Produto</th>
                                                 <th scope="col">Preço de Venda</th>
