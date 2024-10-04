@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ClientMenuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpresaPerfilController;
@@ -27,7 +28,9 @@ Route::post('/reset-password/{token}', [ForgotPasswordController::class, 'submit
 
 
 // Cardápio para cliente
-Route::get('/cardapio', [DashboardController::class, 'index'])->name('dashboard.dashboard');
+Route::get('/cardapio', [ClientMenuController::class, 'menu'])->name('cliente.menu');
+Route::get('/cardapio-restaurante/{empresa}', [ClientMenuController::class, 'show'])->name('cliente.show');
+
 
 
 //Route::group(['middleware' => ['auth', 'empresa']], function ()

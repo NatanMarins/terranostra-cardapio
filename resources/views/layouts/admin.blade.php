@@ -97,11 +97,22 @@
                             </a>
                         </li>
                         -->
-
                         <li class="nav-item">
                             <a href="{{ route('menu.index') }}">
                                 <i class="fa-solid fa-book"></i>
-                                &nbsp &nbsp Cardápio
+                                &nbsp &nbsp Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('pedido.index') }}">
+                                <i class="fa-solid fa-paste"></i>
+                                &nbsp &nbsp Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}">
+                                <i class="fa-solid fa-book"></i>
+                                &nbsp &nbsp Produtos
                             </a>
                         </li>
                         <li class="nav-item">
@@ -110,14 +121,48 @@
                                 &nbsp &nbsp Categorias
                             </a>
                         </li>
-                        @can('index-empresa')
-                            <li class="nav-item">
-                                <a href="{{ route('empresa.index') }}">
-                                    <i class="fa-solid fa-store"></i>
-                                    &nbsp &nbsp Empresas
-                                </a>
-                            </li>
-                        @endcan
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}">
+                                <i class="fa-solid fa-book"></i>
+                                &nbsp &nbsp Clientes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}">
+                                <i class="fa-solid fa-book"></i>
+                                &nbsp &nbsp Relatórios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}">
+                                <i class="fa-solid fa-book"></i>
+                                &nbsp &nbsp Financeiro
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}">
+                                <i class="fa-solid fa-book"></i>
+                                &nbsp &nbsp Histórico de Vendas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}">
+                                <i class="fa-solid fa-book"></i>
+                                &nbsp &nbsp Estoque
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}">
+                                <i class="fa-solid fa-book"></i>
+                                &nbsp &nbsp Avaliações
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}">
+                                <i class="fa-solid fa-book"></i>
+                                &nbsp &nbsp Fidelidade
+                            </a>
+                        </li>
                         @can('index-usuario')
                             <li class="nav-item">
                                 <a href={{ route('usuario.index') }}>
@@ -126,35 +171,14 @@
                                 </a>
                             </li>
                         @endcan
-                        <!--
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Finanças</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Estatísticas</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Histórico</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Configurações</p>
-                            </a>
-                        </li>
-                        -->
+                        @can('index-empresa')
+                            <li class="nav-item">
+                                <a href="{{ route('empresa.index') }}">
+                                    <i class="fa-solid fa-store"></i>
+                                    &nbsp &nbsp Empresas
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </div>

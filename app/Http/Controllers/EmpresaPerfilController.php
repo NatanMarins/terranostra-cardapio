@@ -38,12 +38,13 @@ class EmpresaPerfilController extends Controller
         $empresaId = Auth::user()->empresa_id;
         $empresa = Empresa::where('id', $empresaId)->get()->first();
 
+
         $request->validate([
             'nome' => 'required|string|max:255',
             'razao_social' => 'required',
             'cnpj' => 'required|cnpj',
             'telefone' => 'required',
-            'email' => 'required|email|unique:empresas',
+            'email' => 'required|email|',
             'cep' => 'required',
             'estado' => 'required',
             'cidade' => 'required',

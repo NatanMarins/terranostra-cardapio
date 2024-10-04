@@ -4,6 +4,8 @@
     <div class="container mt-5">
         <h2>Editar Perfil {{ $empresa->nome }}</h2>
 
+        <x-alert />
+
         <form action="{{ route('empresa_profile.update', $empresa->id) }}" method="POST">
             @csrf
             @method('PUT')

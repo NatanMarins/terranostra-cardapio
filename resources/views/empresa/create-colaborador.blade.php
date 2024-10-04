@@ -68,7 +68,7 @@
                                     <div class="row pt-4">
                                         <div class="col-md-12">
                                             <div class="text-center">
-                                                <button type="submit" class="btn btn-secondary">Editar</button>
+                                                <button type="submit" class="btn btn-secondary">Cadastrar</button>
                                                 <button type="reset" class="btn btn-secondary">Cancelar</button>
                                             </div>
                                         </div>

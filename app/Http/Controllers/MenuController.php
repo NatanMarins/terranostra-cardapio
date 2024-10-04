@@ -17,17 +17,19 @@ use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $empresaId = Auth::user()->empresa_id;
 
         $menus = Menu::where('empresa_id', $empresaId)->get();
 
-        return view('menu.index',compact('menus'));
+        return view('menu.index', compact('menus'));
     }
 
 
-    public function show(Menu $menu){
+    public function show(Menu $menu)
+    {
 
         $categoria = Menu::with('categoria')->findOrFail($menu->id);
 
@@ -35,7 +37,8 @@ class MenuController extends Controller
     }
 
 
-    public function create(){
+    public function create()
+    {
 
         $empresa_id = Auth::user()->empresa_id;
 
@@ -45,35 +48,42 @@ class MenuController extends Controller
     }
 
 
-    public function store(MenuRequest $request){
+    public function store(MenuRequest $request)
+    {
 
         //Validar formulário
         $request->validated();
 
         $empresa_id = Auth::user()->empresa_id;
 
+        $codigo = rand(0, 999);
 
         DB::beginTransaction();
-        
-        try{
+
+        try {
+
             //Transformando o nome do arquivo de imagem em um nome único
             $file_name = rand(0, 999999) . '-' . $request->file('product_file_name')->getClientOriginalName();
             $path = $request->file('product_file_name')->storeAs('uploads', $file_name);
 
-            $data = $request->all();
-            $data['product_file_name'] = $path;
-            $data['empresa_id'] = $empresa_id;
-
             //Cadastrar no banco de dados
-            Menu::create($data);
+            Menu::create([
+                'codigo' => $codigo,
+                'nome' => $request->nome,
+                'preco' => $request->preco,
+                'categoria_id' => $request->categoria_id,
+                'descricao' => $request->descricao,
+                'empresa_id' => $empresa_id,
+                'product_file_name' => $path,
+            ]);
 
             //Operação concluída com êxito
             DB::commit();
 
             // Redirecionar o usuário
             return redirect()->route('menu.index')->with('success', 'Produto cadastrado com sucesso!');
-
-        } catch(Exception $e){
+            
+        } catch (Exception $e) {
             //Operação não concluída com êxito
             DB::rollBack();
 
@@ -83,15 +93,17 @@ class MenuController extends Controller
     }
 
 
-    public function edit(Menu $menu){
+    public function edit(Menu $menu)
+    {
 
         $categorias = Categoria::all();
 
-        return view('menu.edit', compact('categorias'),['menu' => $menu]);
+        return view('menu.edit', compact('categorias'), ['menu' => $menu]);
     }
 
 
-    public function update(Request $request, Menu $menu){
+    public function update(Request $request, Menu $menu)
+    {
 
         // Tratamento dos valores monetários para garantir que estejam no formato correto
         $request->merge([
@@ -99,7 +111,7 @@ class MenuController extends Controller
             'preco_promocional' => str_replace(',', '.', $request->preco_promocional),
             'desconto_promocional' => str_replace(',', '.', $request->desconto_promocional),
         ]);
-        
+
         // Validação dos dados do formulário
         $request->validate([
             'nome' => 'required',
@@ -134,14 +146,14 @@ class MenuController extends Controller
         $descontoPercentual = $request->desconto_percentual;
 
 
-        if ($precoPromocional > 0 || $descontoPercentual > 0){
+        if ($precoPromocional > 0 || $descontoPercentual > 0) {
 
-            if ($precoPromocional > 0 && ($descontoPercentual=== null || $descontoPercentual <= 0)){
+            if ($precoPromocional > 0 && ($descontoPercentual === null || $descontoPercentual <= 0)) {
                 //Calcular o percentual de desconto baseado no preço promocional
                 $descontoPercentual = (($request->preco - $precoPromocional) / $request->preco) * 100;
             }
 
-            if (($precoPromocional === null || $precoPromocional <= 0) && $descontoPercentual > 0){
+            if (($precoPromocional === null || $precoPromocional <= 0) && $descontoPercentual > 0) {
                 //Calcular o preço promocional baseado no percentual de desconto
                 $precoPromocional = $request->preco - ($request->preco * ($descontoPercentual / 100));
             }
@@ -151,7 +163,6 @@ class MenuController extends Controller
                 'preco_promocional' => $precoPromocional,
                 'desconto_percentual' => $descontoPercentual,
             ]);
-                
         }
 
 
@@ -175,15 +186,16 @@ class MenuController extends Controller
     }
 
 
-    public function destroy(Menu $menu){
+    public function destroy(Menu $menu)
+    {
 
-        try{
+        try {
             //Excluir registro
             $menu->delete();
 
             //Redirecionar o usuário
             return redirect()->route('menu.index')->with('success', 'Produto excluido com sucesso!');
-        } catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('menu.index')->with('error', 'Produto não excluído!');
         }
     }
